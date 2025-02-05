@@ -1,0 +1,24 @@
+// JAVA Program to find average of three numbers
+
+import java.util.Scanner;
+public class Main {
+    public static void main(String[] args) {
+        double num1, num2, num3;
+        Scanner sc = new Scanner(System.in);
+        System.out.print("Enter first number: ");
+        num1 = sc.nextDouble();
+        System.out.print("Enter second number: ");
+        num2 = sc.nextDouble();
+        System.out.print("Enter third number: ");
+        num3 = sc.nextDouble();
+        double average = (num1 + num2 + num3) / 3;
+        System.out.println("The average of the three numbers is: " + average);
+    }
+}
+
+/* OUTPUT
+Enter first number: 5
+Enter second number: 6
+Enter third number: 7
+The average of the three numbers is: 6.0
+*/
