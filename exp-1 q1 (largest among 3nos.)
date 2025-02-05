@@ -1,0 +1,27 @@
+// JAVA Program to take three number susing scammer class and find the largest number among them
+
+import java.util.*;
+public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        System.out.print("Enter first number: ");
+        int n1 = sc.nextInt();
+        System.out.print("Enter second number: ");
+        int n2 = sc.nextInt();
+        System.out.print("Enter third number: ");
+        int n3 = sc.nextInt();
+        int l = n1;
+        if(l < n2)
+            l = n2;
+        if(l < n3)
+            l = n3;
+        System.out.println("Largest is "+l);
+    }
+}
+
+/* OUTPUT
+Enter first number: 4
+Enter second number: 67
+Enter third number: 345
+Largest is 345
+*/
