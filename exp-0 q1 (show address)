@@ -1,0 +1,15 @@
+// JAVA Program to print your address
+
+public class Main {
+    public static void main(String[] args) {
+        System.out.println("City : "+"Berhampur");
+        System.out.println("State : "+"Odisha");
+        System.out.println("Country : "+"India");
+    }
+}
+
+/* OUTPUT
+City : Berhampur
+State : Odisha
+Country : India
+*/
