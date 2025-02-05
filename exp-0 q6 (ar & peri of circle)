@@ -1,0 +1,22 @@
+// JAVA Prigram to find area and perimeter of a circle
+
+import java.util.Scanner;
+public class Main {
+    public static void main(String[] args) {
+        double radius, area, perimeter;
+        double PI = 3.14;  
+        Scanner sc = new Scanner(System.in);
+        System.out.print("Enter the radius of the circle: ");
+        radius = sc.nextDouble();
+        area = PI * radius * radius;           
+        perimeter = 2 * PI * radius;             
+        System.out.println("Area of the circle: " + area);
+        System.out.println("Perimeter of the circle: " + perimeter);
+    }
+}
+
+/* OUTPUT
+Enter the radius of the circle: 45
+Area of the circle: 6358.500000000001
+Perimeter of the circle: 282.6
+*/
