@@ -1,0 +1,29 @@
+// JAVA Program to check if a number is binary or not
+
+import java.util.*;
+public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        System.out.print("Enter a number: ");
+        int n = sc.nextInt();
+        int ra = 0; 
+        int input = n;
+        while (n > 0) {
+            int r = n % 10; t
+            if (r != 0 && r != 1) {  
+                ra = 1;  
+            }
+            n = n / 10;  
+        }
+        if (ra == 0) {
+            System.out.println(input + " is a binary number.");
+        } else {
+            System.out.println(input + " is not a binary number.");
+        }
+    }
+}
+
+/* OUTPUT
+Enter a number: 101010
+101010 is a binary number.
+*/
