@@ -1,0 +1,57 @@
+// JAVA Program to swap two numbers with and without temporaray variable
+
+import java.util.Scanner; //with temp variable
+publci class Main {
+    public static void main(String[] args) {
+        int x, y;
+        Scanner sc = new Scanner(System.in);
+        System.out.print("Enter value for x: ");
+        x = sc.nextInt();
+        System.out.print("Enter value for y: ");
+        y = sc.nextInt();
+        System.out.println("Before Swap");
+        System.out.println("x = " + x);
+        System.out.println("y = " + y);
+        int temp = x;
+        x = y;
+        y = temp;
+        System.out.println("After Swap");
+        System.out.println("x = " + x);
+        System.out.println("y = " + y);
+    }
+}
+
+/* OUTPUT
+Enter value for x: 3
+Enter value for y: 8
+Before Swap
+x = 3
+y = 8
+After Swap
+x = 8
+y = 3
+*/
+
+import java.util.Scanner; //without temp variable using Arithmetic Operations and XOR Bitwise Operator
+public class Main {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Enter the first number (a): ");
+        int a = scanner.nextInt();
+        System.out.print("Enter the second number (b): ");
+        int b = scanner.nextInt();
+        System.out.println("Before swap: a = " + a + ", b = " + b);
+        a = a + b;  //  a = a ^ b;
+        b = a - b;  //  b = a ^ b;
+        a = a - b;  //  a = a ^ b;
+        System.out.println("After swap: a = " + a + ", b = " + b);
+        scanner.close();
+    }
+}
+
+/* OUTPUT
+Enter the first number (a): 5
+Enter the second number (b): 23
+Before swap: a = 5, b = 23
+After swap: a = 23, b = 5
+*/
