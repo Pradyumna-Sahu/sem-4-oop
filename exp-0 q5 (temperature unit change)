@@ -1,0 +1,35 @@
+// JAVA Program to convert fahrenheit to celcius and vice versa
+
+import java.util.Scanner; // fahrenheit to celcius
+public class Main {
+    public static void main(String[] args) {
+        float fahrenheit, celsius;
+        Scanner sc = new Scanner(System.in);
+        System.out.print("Enter temperature in Fahrenheit: ");
+        fahrenheit = sc.nextFloat();
+        celsius = (fahrenheit - 32) * 5 / 9;
+        System.out.println(fahrenheit + " Fahrenheit is equal to " + celsius + " Celsius.");
+    }
+}
+
+/* OUTPUT
+Enter temperature in Fahrenheit: 56
+56.0 Fahrenheit is equal to 13.333333 Celsius.
+*/
+
+import java.util.Scanner; // celcius to fahrenheit 
+public class Main {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Enter temperature in Celsius: ");
+        float celsius = scanner.nextFloat();
+        float fahrenheit = (celsius * 9/5) + 32;
+        System.out.println(celsius + " Celsius is equal to " + fahrenheit + " Fahrenheit.");
+        scanner.close();
+    }
+}
+
+/* OUTPUT
+Enter temperature in Celsius: 13.3
+13.3 Celsius is equal to 55.940002 Fahrenheit.
+*/
