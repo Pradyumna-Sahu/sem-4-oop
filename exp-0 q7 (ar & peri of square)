@@ -1,0 +1,21 @@
+// JAVA Prigram to find area and perimeter of a square
+
+import java.util.Scanner;
+public class Main {
+    public static void main(String[] args) {
+        double side, area, perimeter;
+        Scanner sc = new Scanner(System.in);
+        System.out.print("Enter the side length of the square: ");
+        side = sc.nextDouble();
+        area = side * side;                   
+        perimeter = 4 * side;                 
+        System.out.println("Area of the square: " + area);
+        System.out.println("Perimeter of the square: " + perimeter);
+    }
+}
+
+/* OUTPUT
+Enter the side length of the square: 35
+Area of the square: 1225.0
+Perimeter of the square: 140.0
+*/
