@@ -1,0 +1,34 @@
+// JAVA Program to check if a number is prime or not
+
+import java.util.Scanner;
+
+public class PrimeNumberCheck {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Enter a number: ");
+        int number = scanner.nextInt();
+        int n = 0;
+        if (number <= 1) {
+            n = 0;
+        } else {
+            for (int i = 2; i <= Math.sqrt(number); i++) {
+                if (number % i == 0) {
+                    n = 1; 
+                    break;
+                }
+            }
+        }
+        
+        if (n == 1) {  // Corrected the comparison operator here
+            System.out.println(number + " is not a prime number.");
+        } else {
+            System.out.println(number + " is a prime number.");
+        }
+        scanner.close();
+    }
+}
+
+/* OUTPUT
+Enter a number: 10
+10 is not a prime number.
+*/
