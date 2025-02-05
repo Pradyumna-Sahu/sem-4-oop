@@ -1,0 +1,33 @@
+// JAVA Program to show elements of an array
+
+import java.util.Scanner;
+public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        System.out.print("Enter number of elements: ");
+        int n = sc.nextInt();
+        int []arr = new int[n];
+        for(int i=0;i<n;i++) {
+            System.out.print("Enter elements-" + (i+1) + ":");
+            arr[i] = sc.nextInt();
+        }
+        System.out.println("Arrsy elements:-");
+        for(int i=0;i<n;i++) {
+            System.out.println("Elements-" + (i+1) + ": " + arr[i]);
+        }
+        sc.close();
+    }
+}
+
+/* OUTPUT
+Enter number of elements: 4
+Enter elements-1:23
+Enter elements-2:54
+Enter elements-3:76
+Enter elements-4:3
+Arrsy elements:-
+Elements-1: 23
+Elements-2: 54
+Elements-3: 76
+Elements-4: 3
+*/
