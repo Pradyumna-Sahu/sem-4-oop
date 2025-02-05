@@ -1,0 +1,41 @@
+// JAVA Program to take marks 5 students using array and calculate the average marks and describe te grade of the student
+
+import java.util.Scanner;
+public class StudentGrade {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int[] marks = new int[5];
+        int sum = 0;
+        System.out.println("Enter the marks of 5 subjects:");
+        for (int i = 0; i < 5; i++) {
+            System.out.print("Enter marks for subject " + (i + 1) + ": ");
+            marks[i] = scanner.nextInt();
+            sum += marks[i];  
+        }
+        float average = sum / 5.0;
+        System.out.println("The average marks are: " + average);
+        if (average >= 90) {
+            System.out.println("The grade of the student is: A");
+        } else if (average >= 80) {
+            System.out.println("The grade of the student is: B");
+        } else if (average >= 70) {
+            System.out.println("The grade of the student is: C");
+        } else if (average >= 60) {
+            System.out.println("The grade of the student is: D");
+        } else {
+            System.out.println("The grade of the student is: F");
+        }
+        scanner.close();
+    }
+}
+
+/* OUTPUT
+Enter the marks of 5 subjects:
+Enter marks for subject 1: 85
+Enter marks for subject 2: 78
+Enter marks for subject 3: 92
+Enter marks for subject 4: 88
+Enter marks for subject 5: 76
+The average marks are: 83.8
+The grade of the student is: B
+*./
