@@ -1,0 +1,24 @@
+// JAVA Program to count the number of even words in a string
+
+import java.util.Scanner;
+public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        System.out.print("Enter a string: ");
+        String str = sc.nextLine();
+        String[] words = str.split("\\s+");
+        int evenCount = 0;
+        for (int i = 0; i < words.length; i++) {
+            if (words[i].length() % 2 == 0) {
+                evenCount++;
+            }
+        }
+        System.out.println("Number of even-length words: " + evenCount);
+        sc.close();
+    }
+}
+
+/* OUTPUT
+Enter a string: i am writing a java code
+Number of even-length words: 3
+*/
