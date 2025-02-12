@@ -1,0 +1,94 @@
+/* JAVA Menu Driven Program to compare two strings using the following methods:
+1) equals() method   2) == opeator   3) compareTo() method
+*/
+
+import java.util.Scanner;
+public class Main {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Enter the first string: ");
+        String str1 = scanner.nextLine();
+        System.out.print("Enter the second string: ");
+        String str2 = scanner.nextLine();
+        int choice;
+        do {
+            System.out.println("\nChoose the string comparison method:");
+            System.out.println("1. equals() method");
+            System.out.println("2. == operator");
+            System.out.println("3. compareTo() method");
+            System.out.println("4. Exit");
+            System.out.print("Enter your choice (1-4): ");
+            choice = scanner.nextInt();
+            scanner.nextLine(); 
+            switch (choice) {
+                case 1:
+                    if (str1.equals(str2)) {
+                        System.out.println("The strings are equal.");
+                    } else {
+                        System.out.println("The strings are not equal.");
+                    }
+                    break;
+                case 2:
+                    if (str1 == str2) {
+                        System.out.println("The strings are the same.");
+                    } else {
+                        System.out.println("The strings are different.");
+                    }
+                    break;
+                case 3:
+                    int result = str1.compareTo(str2);
+                    if (result == 0) {
+                        System.out.println("The strings are equal.");
+                    } else if (result < 0) {
+                        System.out.println("The first string is less than the second string.");
+                    } else {
+                        System.out.println("The first string is greater than the second string.");
+                    }
+                    break;
+                case 4:
+                    System.out.println("Exiting the program.");
+                    break;
+                default:
+                    System.out.println("Invalid choice! Please enter a valid option.");
+            }
+        } while (choice != 4);
+        scanner.close();
+    }
+}
+
+/* OUTPUT
+Enter the first string: Hello
+Enter the second string: HELLO
+
+Choose the string comparison method:
+1. equals() method
+2. == operator
+3. compareTo() method
+4. Exit
+Enter your choice (1-4): 1
+The strings are not equal.
+
+Choose the string comparison method:
+1. equals() method
+2. == operator
+3. compareTo() method
+4. Exit
+Enter your choice (1-4): 2
+The strings are different.
+
+Choose the string comparison method:
+1. equals() method
+2. == operator
+3. compareTo() method
+4. Exit
+Enter your choice (1-4): 3
+The first string is greater than the second string.
+
+Choose the string comparison method:
+1. equals() method
+2. == operator
+3. compareTo() method
+4. Exit
+Enter your choice (1-4): 4
+Exiting the program.
+*/
