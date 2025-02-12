@@ -1,0 +1,17 @@
+// JAVA Program to count the number of words in a sentence using split method
+
+import java.util.*;
+public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        System.out.print("Enter a string: ");
+        String str = sc.nextLine();
+        System.out.println("Number of words: " + str.split(" ").length);
+        sc.close();
+    }
+}
+
+/* OUTPUT
+Enter a string: e d f g h g
+Number of words: 6
+*/
