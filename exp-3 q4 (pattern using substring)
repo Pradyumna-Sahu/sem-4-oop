@@ -1,0 +1,25 @@
+// JAVA Program to design a pattern where input would be taken from the user
+
+import java.util.*;
+public class Main {
+    public static void main(String args[]) {
+        Scanner sc = new Scanner(System.in);
+        System.out.print("Enter a string: ");
+        String str = sc.next();
+        int l = str.length();
+        for(int i=0;i<l;i++) {
+            System.out.println(str.substring(i));
+        }
+    }
+}
+
+/* OUTPUT
+Enter a string: SANKALP
+SANKALP
+ANKALP
+NKALP
+KALP
+ALP
+LP
+P
+*/
