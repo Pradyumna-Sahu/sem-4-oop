@@ -1,0 +1,46 @@
+// JAVA Program to design a class rectangle with data members width and height. Define a constructor with same data members. Calculate the area and perimeter of the rectangle and display. Use this keyword to initialize the instant variable.
+
+import java.util.*;
+class Rectangle {
+    double width;
+    double height;
+
+    Rectangle(double width, double height) {
+        this.width = width;
+        this.height = height;
+    }
+
+    double area() {
+        return width * height;
+    }
+
+    double perimeter() {
+        return 2 * (width + height);
+    }
+
+    void display() {
+        System.out.println("Width: " + width);
+        System.out.println("Height: " + height);
+        System.out.println("Area: " + area());
+        System.out.println("Perimeter: " + perimeter());
+    }
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Enter the width of the rectangle: ");
+        double width = scanner.nextDouble();
+        System.out.print("Enter the height of the rectangle: ");
+        double height = scanner.nextDouble();
+        Rectangle rect = new Rectangle(width, height);
+        rect.display();
+    }
+}
+
+/* OUTPUT
+Enter the width of the rectangle: 5.0
+Enter the height of the rectangle: 3.0
+Width: 5.0
+Height: 3.0
+Area: 15.0
+Perimeter: 16.0
+*/
