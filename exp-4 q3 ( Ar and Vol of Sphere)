@@ -1,0 +1,39 @@
+// JAVA Program ro design a class sphere with radius as a data member and print the surface, volume of the sphere.
+
+import java.util.Scanner; 
+class Sphere {
+    double radius;
+    
+    Sphere(double radius) {
+        this.radius = radius;
+    }
+
+    double surfaceArea() {
+        return 4 * Math.PI * radius * radius;  // 4πr^2
+    }
+
+    double volume() {
+        return (4.0 / 3) * Math.PI * Math.pow(radius, 3);  // (4/3)πr^3
+    }
+
+    void display() {
+        System.out.println("Radius: " + radius);
+        System.out.println("Surface Area: " + surfaceArea());
+        System.out.println("Volume: " + volume());
+    }
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Enter the radius of the sphere: ");
+        double radius = scanner.nextDouble();
+        Sphere sphere = new Sphere(radius);
+        sphere.display();
+    }
+}
+
+/* OUTPUT
+Enter the radius of the sphere: 5
+Radius: 5.0
+Surface Area: 314.1592653589793
+Volume: 523.5987755982989
+*/
