@@ -1,0 +1,72 @@
+// JAVA Program to overload a constructor
+
+class Box {
+    double length;
+    double width;
+    double height;
+
+    // Constructor with no parameters (default constructor)
+    Box() {
+        length = 1.0;
+        width = 1.0;
+        height = 1.0;
+    }
+
+    // Constructor with parameters to initialize all attributes
+    Box(double length, double width, double height) {
+        this.length = length;
+        this.width = width;
+        this.height = height;
+    }
+
+    // Constructor with parameters to initialize length and width, height is set to 1
+    Box(double length, double width) {
+        this.length = length;
+        this.width = width;
+        this.height = 1.0;
+    }
+
+    double volume() {
+        return length * width * height;
+    }
+
+    void display() {
+        System.out.println("Length: " + length);
+        System.out.println("Width: " + width);
+        System.out.println("Height: " + height);
+        System.out.println("Volume: " + volume());
+    }
+
+    public static void main(String[] args) {
+        Box box1 = new Box(); // Calls default constructor
+        Box box2 = new Box(2.5, 3.0, 4.5); // Calls constructor with all parameters
+        Box box3 = new Box(3.0, 2.0); // Calls constructor with length and width
+
+        System.out.println("Box 1:");
+        box1.display();
+        System.out.println("\nBox 2:");
+        box2.display();
+        System.out.println("\nBox 3:");
+        box3.display();
+    }
+}
+
+/* OUTPUT
+Box 1:
+Length: 1.0
+Width: 1.0
+Height: 1.0
+Volume: 1.0
+
+Box 2:
+Length: 2.5
+Width: 3.0
+Height: 4.5
+Volume: 33.75
+
+Box 3:
+Length: 3.0
+Width: 2.0
+Height: 1.0
+Volume: 6.0
+*/
