@@ -1,0 +1,96 @@
+// JAVA Program to design a classbook with data members book_name, author_name and price. Declare a display method to details of 5 books.
+
+import java.util.Scanner;  
+class Book {
+    String book_name;
+    String author_name;
+    double price;
+
+    Book(String book_name, String author_name, double price) {
+        this.book_name = book_name;
+        this.author_name = author_name;
+        this.price = price;
+    }
+
+    void display() {
+        System.out.println("Book Name: " + book_name);
+        System.out.println("Author Name: " + author_name);
+        System.out.println("Price: " + price);
+        System.out.println();  
+    }
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        Book[] books = new Book[5];
+        for (int i = 0; i < 5; i++) {
+            System.out.println("Enter details for Book " + (i + 1) + ":");
+            
+            System.out.print("Enter book name: ");
+            String book_name = scanner.nextLine();
+
+            System.out.print("Enter author name: ");
+            String author_name = scanner.nextLine();
+
+            System.out.print("Enter price: ");
+            double price = scanner.nextDouble();
+            scanner.nextLine();  // Consume newline left-over
+
+            books[i] = new Book(book_name, author_name, price);
+        }
+
+        System.out.println("\n--- Book Details ---");
+        for (int i = 0; i < 5; i++) {
+            books[i].display();
+        }
+
+    }
+}
+
+/* OUTPUT
+Enter details for Book 1:
+Enter book name: Java Programming
+Enter author name: James Gosling
+Enter price: 499.99
+
+Enter details for Book 2:
+Enter book name: Data Structures
+Enter author name: Robert Sedgewick
+Enter price: 399.50
+
+Enter details for Book 3:
+Enter book name: Algorithms
+Enter author name: Thomas H. Cormen
+Enter price: 599.00
+
+Enter details for Book 4:
+Enter book name: The Pragmatic Programmer
+Enter author name: Andrew Hunt
+Enter price: 450.75
+
+Enter details for Book 5:
+Enter book name: Clean Code
+Enter author name: Robert C. Martin
+Enter price: 399.99
+
+--- Book Details ---
+Book Name: Java Programming
+Author Name: James Gosling
+Price: 499.99
+
+Book Name: Data Structures
+Author Name: Robert Sedgewick
+Price: 399.5
+
+Book Name: Algorithms
+Author Name: Thomas H. Cormen
+Price: 599.0
+
+Book Name: The Pragmatic Programmer
+Author Name: Andrew Hunt
+Price: 450.75
+
+Book Name: Clean Code
+Author Name: Robert C. Martin
+Price: 399.99
+
+*/
