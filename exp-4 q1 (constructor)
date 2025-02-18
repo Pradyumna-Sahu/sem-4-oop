@@ -1,0 +1,30 @@
+// JAVA Program to define a student class with attributes id,name,mark. Define a display method to show the student information and create a student class object to access display method. Define a constructor to initialize the data members.
+
+class Student {
+    int id;
+    String name;
+    double mark;
+
+    Student(int id, String name, double mark) {
+        this.id = id;
+        this.name = name;
+        this.mark = mark;
+    }
+
+    void display() {
+        System.out.println("Student ID: " + id);
+        System.out.println("Student Name: " + name);
+        System.out.println("Student Mark: " + mark);
+    }
+
+    public static void main(String[] args) {
+        Student student1 = new Student(101, "John Doe", 85.5);
+        student1.display();
+    }
+}
+
+/* OUTPUT
+Student ID: 101
+Student Name: John Doe
+Student Mark: 85.5
+*/
