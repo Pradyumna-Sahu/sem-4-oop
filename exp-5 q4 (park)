@@ -1,0 +1,41 @@
+// JAVA Program to define a Park class with attributes length, breadth and area. Define a suitable constructor and a method to display the object.
+
+// Park class definition
+class Park {
+    // Data members for length, breadth, and area
+    public double length;
+    public double breadth;
+    public double area;
+
+    // Constructor to initialize length, breadth, and calculate the area
+    public Park(double length, double breadth) {
+        this.length = length;
+        this.breadth = breadth;
+        this.area = length * breadth;  // Calculating area of the park
+    }
+
+    // Method to display the details of the park
+    public void display() {
+        System.out.println("Length of the Park: " + length);
+        System.out.println("Breadth of the Park: " + breadth);
+        System.out.println("Area of the Park: " + area);
+        System.out.println("---------------------------");
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        // Creating a Park object with length and breadth
+        Park park1 = new Park(150.0, 100.0);
+        
+        // Displaying the park details
+        park1.display();
+    }
+}
+
+/* OUTPUT
+Length of the Park: 150.0
+Breadth of the Park: 100.0
+Area of the Park: 15000.0
+---------------------------
+*/
