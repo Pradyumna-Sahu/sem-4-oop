@@ -1,0 +1,84 @@
+//JAVA Program to create a bank class having data members bank_name,account_number,branch_name. Write a method like withdraw deposit to check the total balance
+
+// Bank class definition
+class Bank {
+    // Data members of the class
+    private String bank_name;
+    private String account_number;
+    private String branch_name;
+    private double balance;
+
+    // Constructor to initialize the Bank object
+    public Bank(String bank_name, String account_number, String branch_name, double initial_balance) {
+        this.bank_name = bank_name;
+        this.account_number = account_number;
+        this.branch_name = branch_name;
+        this.balance = initial_balance;
+    }
+
+    // Method to deposit money into the account
+    public void deposit(double amount) {
+        if (amount > 0) {
+            balance += amount;
+            System.out.println("Deposited " + amount + ". New balance: " + balance);
+        } else {
+            System.out.println("Deposit amount must be positive.");
+        }
+    }
+
+    // Method to withdraw money from the account
+    public void withdraw(double amount) {
+        if (amount > 0 && amount <= balance) {
+            balance -= amount;
+            System.out.println("Withdrew " + amount + ". New balance: " + balance);
+        } else if (amount > balance) {
+            System.out.println("Insufficient balance to withdraw " + amount);
+        } else {
+            System.out.println("Withdraw amount must be positive.");
+        }
+    }
+
+    // Method to display account details
+    public void displayAccountDetails() {
+        System.out.println("Bank Name: " + bank_name);
+        System.out.println("Account Number: " + account_number);
+        System.out.println("Branch Name: " + branch_name);
+        System.out.println("Current Balance: " + balance);
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        // Creating a Bank object
+        Bank myAccount = new Bank("XYZ Bank", "123456789", "Main Branch", 1000.00);
+        
+        // Displaying account details
+        myAccount.displayAccountDetails();
+        
+        // Depositing money into the account
+        myAccount.deposit(500.00);
+
+        // Withdrawing money from the account
+        myAccount.withdraw(200.00);
+        
+        // Displaying account details after transactions
+        myAccount.displayAccountDetails();
+        
+        // Trying to withdraw more money than the balance
+        myAccount.withdraw(1500.00);
+    }
+}
+
+/* OUTPUT
+Bank Name: XYZ Bank
+Account Number: 123456789
+Branch Name: Main Branch
+Current Balance: 1000.0
+Deposited 500.0. New balance: 1500.0
+Withdrew 200.0. New balance: 1300.0
+Bank Name: XYZ Bank
+Account Number: 123456789
+Branch Name: Main Branch
+Current Balance: 1300.0
+Insufficient balance to withdraw 1500.0
+*/
