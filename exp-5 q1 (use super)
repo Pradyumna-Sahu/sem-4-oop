@@ -1,0 +1,52 @@
+// JAVA Program to implement single inheritance using super keyword
+
+// Base class
+class Animal {
+    // Instance variable
+    String name;
+
+    // Constructor of the base class
+    public Animal(String name) {
+        this.name = name;
+        System.out.println("Animal Constructor called");
+    }
+
+    // Method of base class
+    public void eat() {
+        System.out.println(name + " is eating.");
+    }
+}
+
+// Derived class
+class Dog extends Animal {
+    // Constructor of derived class
+    public Dog(String name) {
+        // Calling the base class constructor using the super keyword
+        super(name);
+        System.out.println("Dog Constructor called");
+    }
+
+    // Method of derived class
+    public void bark() {
+        System.out.println(name + " is barking.");
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        // Creating an object of the derived class
+        Dog dog = new Dog("Buddy");
+        
+        // Calling methods from both the base class and the derived class
+        dog.eat();   // Inherited from Animal
+        dog.bark();  // Defined in Dog
+    }
+}
+
+
+/* OUTPUT
+Animal Constructor called
+Dog Constructor called
+Buddy is eating.
+Buddy is barking.
+*/
