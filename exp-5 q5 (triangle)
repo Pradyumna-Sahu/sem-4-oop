@@ -1,0 +1,98 @@
+// JAVA Program to create a Triangle class with constructors (no-argument and parameterized) having instance variables to record its three sides. Write validate() method to check for valid input. Use findArea() and findPerimerter() of the Triangle class object.
+
+// Triangle class definition
+class Triangle {
+    // Instance variables to store the sides of the triangle
+    public double side1;
+    public double side2;
+    public double side3;
+
+    // No-argument constructor (default sides as 0)
+    public Triangle() {
+        this.side1 = 0;
+        this.side2 = 0;
+        this.side3 = 0;
+    }
+
+    // Parameterized constructor to initialize the sides
+    public Triangle(double side1, double side2, double side3) {
+        this.side1 = side1;
+        this.side2 = side2;
+        this.side3 = side3;
+    }
+
+    // Method to validate the sides of the triangle (Triangle Inequality Theorem)
+    public boolean validate() {
+        if (side1 <= 0 || side2 <= 0 || side3 <= 0) {
+            System.out.println("Sides must be greater than zero.");
+            return false;
+        }
+        // Check if the sum of any two sides is greater than the third side
+        if (side1 + side2 > side3 && side1 + side3 > side2 && side2 + side3 > side1) {
+            return true;
+        } else {
+            System.out.println("Invalid sides for a triangle.");
+            return false;
+        }
+    }
+
+    // Method to calculate the perimeter of the triangle
+    public double findPerimeter() {
+        return side1 + side2 + side3;
+    }
+
+    // Method to calculate the area of the triangle using Heron's formula
+    public double findArea() {
+        if (!validate()) {
+            return 0; // If the triangle is invalid, return 0 area
+        }
+        double s = findPerimeter() / 2;  // Semi-perimeter
+        // Heron's formula for area
+        return Math.sqrt(s * (s - side1) * (s - side2) * (s - side3));
+    }
+
+    // Method to display the details of the triangle
+    public void display() {
+        if (validate()) {
+            System.out.println("Sides of the Triangle: " + side1 + ", " + side2 + ", " + side3);
+            System.out.println("Perimeter: " + findPerimeter());
+            System.out.println("Area: " + findArea());
+        }
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        // Creating a Triangle object using parameterized constructor
+        Triangle triangle1 = new Triangle(3, 4, 5);
+        
+        // Displaying the details of the triangle
+        System.out.println("Triangle 1:");
+        triangle1.display();
+        
+        // Creating an invalid Triangle object (sides do not satisfy triangle inequality)
+        Triangle triangle2 = new Triangle(1, 2, 3);
+        
+        // Displaying the details of the invalid triangle
+        System.out.println("Triangle 2:");
+        triangle2.display();
+        
+        // Creating a Triangle object using the no-argument constructor
+        Triangle triangle3 = new Triangle();
+        
+        // Displaying the details of the default triangle
+        System.out.println("Triangle 3:");
+        triangle3.display();
+    }
+}
+
+/* OUTPUT
+Triangle 1:
+Sides of the Triangle: 3.0, 4.0, 5.0
+Perimeter: 12.0
+Area: 6.0
+Triangle 2:
+Invalid sides for a triangle.
+Triangle 3:
+Sides must be greater than zero.
+*/
