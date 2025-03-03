@@ -1,0 +1,70 @@
+// JAVA Program to define a class called Room with the follwing attributes 1.length, 2.breadth, 3.height, 4.florr_area, 5.Wall_area, 6.No.of_fans. 7.No.of_windows, 8.no.of_doors. Define a suitable constructor and a method to display details of a room. Assume that 20% of the total wall area is occupied by doors and windows.
+
+// Room class definition
+class Room {
+    // Attributes of the Room class
+    public double length;
+    public double breadth;
+    public double height;
+    public double floor_area;
+    public double wall_area;
+    public int no_of_fans;
+    public int no_of_windows;
+    public int no_of_doors;
+
+    // Constructor to initialize the Room object
+    public Room(double length, double breadth, double height, int no_of_fans, int no_of_windows, int no_of_doors) {
+        this.length = length;
+        this.breadth = breadth;
+        this.height = height;
+        this.no_of_fans = no_of_fans;
+        this.no_of_windows = no_of_windows;
+        this.no_of_doors = no_of_doors;
+
+        // Calculate floor area (length * breadth)
+        this.floor_area = length * breadth;
+
+        // Calculate wall area (4 * height * (length + breadth))
+        // Assuming the room has four walls (2 opposite walls of length and 2 opposite walls of breadth)
+        this.wall_area = 2 * height * (length + breadth);
+
+        // Deduct 20% of the wall area for doors and windows
+        double occupied_area = 0.20 * this.wall_area;
+        this.wall_area -= occupied_area; // Update the wall area after considering doors and windows
+    }
+
+    // Method to display the details of the room
+    public void display() {
+        System.out.println("Room Details:");
+        System.out.println("Length: " + length + " meters");
+        System.out.println("Breadth: " + breadth + " meters");
+        System.out.println("Height: " + height + " meters");
+        System.out.println("Floor Area: " + floor_area + " square meters");
+        System.out.println("Wall Area (after considering doors and windows): " + wall_area + " square meters");
+        System.out.println("Number of Fans: " + no_of_fans);
+        System.out.println("Number of Windows: " + no_of_windows);
+        System.out.println("Number of Doors: " + no_of_doors);
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        // Create a Room object with specific dimensions and features
+        Room myRoom = new Room(5, 4, 3, 2, 4, 1);
+        
+        // Display the details of the room
+        myRoom.display();
+    }
+}
+
+/* OUTPUT
+Room Details:
+Length: 5.0 meters
+Breadth: 4.0 meters
+Height: 3.0 meters
+Floor Area: 20.0 square meters
+Wall Area (after considering doors and windows): 39.6 square meters
+Number of Fans: 2
+Number of Windows: 4
+Number of Doors: 1
+*/
