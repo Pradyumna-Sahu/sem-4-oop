@@ -1,0 +1,81 @@
+// JAVA Program to create a class Rectangle, with default constructor, one argument construct, and two argument constructors, and define the methods area and perimeter of the rectangle. Create three different objects with the help of three different constructors, and print the area and perimeter of those objects.
+
+// Rectangle class definition
+class Rectangle {
+    // Data members for length and width (changed from private to public)
+    public double length;
+    public double width;
+
+    // Default constructor (sets length and width to 0)
+    public Rectangle() {
+        this.length = 0;
+        this.width = 0;
+    }
+
+    // One argument constructor (used for a square, length and width are the same)
+    public Rectangle(double side) {
+        this.length = side;
+        this.width = side;
+    }
+
+    // Two argument constructor (used for a rectangle, with different length and width)
+    public Rectangle(double length, double width) {
+        this.length = length;
+        this.width = width;
+    }
+
+    // Method to calculate the area of the rectangle
+    public double area() {
+        return length * width;
+    }
+
+    // Method to calculate the perimeter of the rectangle
+    public double perimeter() {
+        return 2 * (length + width);
+    }
+
+    // Method to display the dimensions, area, and perimeter
+    public void display() {
+        System.out.println("Length: " + length + ", Width: " + width);
+        System.out.println("Area: " + area());
+        System.out.println("Perimeter: " + perimeter());
+        System.out.println("---------------------------");
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        // Creating objects using different constructors
+        Rectangle rect1 = new Rectangle();  // Default constructor
+        Rectangle rect2 = new Rectangle(5); // One argument constructor (square)
+        Rectangle rect3 = new Rectangle(4, 7); // Two argument constructor (rectangle)
+
+        // Displaying the details of each rectangle
+        System.out.println("Rectangle 1 (Using Default Constructor):");
+        rect1.display();
+
+        System.out.println("Rectangle 2 (Using One Argument Constructor):");
+        rect2.display();
+
+        System.out.println("Rectangle 3 (Using Two Argument Constructor):");
+        rect3.display();
+    }
+}
+
+/* OUTPUT
+Rectangle 1 (Using Default Constructor):
+Length: 0.0, Width: 0.0
+Area: 0.0
+Perimeter: 0.0
+---------------------------
+Rectangle 2 (Using One Argument Constructor):
+Length: 5.0, Width: 5.0
+Area: 25.0
+Perimeter: 20.0
+---------------------------
+Rectangle 3 (Using Two Argument Constructor):
+Length: 4.0, Width: 7.0
+Area: 28.0
+Perimeter: 22.0
+---------------------------
+*/
