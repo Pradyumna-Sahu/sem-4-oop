@@ -1,0 +1,239 @@
+/* JAVA Program to Create the class account that stores the customer name, account number and type of account. From
+this derive current_account and savings_account to make them more specific to their requirements.
+Include necessary member functions to achieve the following tasks.
+a) Account deposited from a customer and updates the balance.
+b) Display the balance.
+c) Compute and deposit the interest.
+d) Permit withdrawal and update the balance.
+e) Check for the minimum balance, impose penalty if necessary and update the balance
+*/
+
+import java.util.Scanner;
+
+class Account {
+    String customerName;
+    String accountNumber;
+    String accountType;
+    double balance;
+
+    public Account(String customerName, String accountNumber, String accountType, double balance) {
+        this.customerName = customerName;
+        this.accountNumber = accountNumber;
+        this.accountType = accountType;
+        this.balance = balance;
+    }
+
+    public void deposit(double amount) {
+        balance += amount;
+        System.out.println("Deposited: " + amount);
+    }
+
+    public void displayBalance() {
+        System.out.println("Current Balance: " + balance);
+    }
+
+    public void withdraw(double amount) {
+        if (balance >= amount) {
+            balance -= amount;
+            System.out.println("Withdrawn: " + amount);
+        } else {
+            System.out.println("Insufficient Balance.");
+        }
+    }
+}
+
+class CurrentAccount extends Account {
+    double minimumBalance = 1000;
+    double penalty = 100;
+
+    public CurrentAccount(String customerName, String accountNumber, double balance) {
+        super(customerName, accountNumber, "Current", balance);
+    }
+
+    public void checkMinimumBalance() {
+        if (balance < minimumBalance) {
+            balance -= penalty;
+            System.out.println("Minimum balance penalty imposed: " + penalty);
+        }
+    }
+
+    @Override
+    public void withdraw(double amount){
+        if(balance - amount >= -minimumBalance){
+            super.withdraw(amount);
+        } else {
+            System.out.println("Withdrawal exceeds overdraft limit.");
+        }
+    }
+}
+
+class SavingsAccount extends Account {
+    double interestRate = 0.04;
+
+    public SavingsAccount(String customerName, String accountNumber, double balance) {
+        super(customerName, accountNumber, "Savings", balance);
+    }
+
+    public void computeAndDepositInterest() {
+        double interest = balance * interestRate;
+        deposit(interest);
+        System.out.println("Interest deposited: " + interest);
+    }
+}
+
+public class AccountTest {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        CurrentAccount currentAccount = new CurrentAccount("Alice", "CA123", 5000);
+        SavingsAccount savingsAccount = new SavingsAccount("Bob", "SA456", 10000);
+
+        System.out.println("Current Account:");
+        currentAccount.displayBalance();
+        currentAccount.deposit(2000);
+        currentAccount.displayBalance();
+        currentAccount.withdraw(3000);
+        currentAccount.displayBalance();
+        currentAccount.checkMinimumBalance();
+        currentAccount.displayBalance();
+        currentAccount.withdraw(5000);
+        currentAccount.displayBalance();
+
+        System.out.println("\nSavings Account:");
+        savingsAccount.displayBalance();
+        savingsAccount.deposit(3000);
+        savingsAccount.displayBalance();
+        savingsAccount.computeAndDepositInterest();
+        savingsAccount.displayBalance();
+        savingsAccount.withdraw(2000);
+        savingsAccount.displayBalance();
+    }
+}
+
+/* OUTPUT
+Java
+
+import java.util.Scanner;
+
+class Account {
+    String customerName;
+    String accountNumber;
+    String accountType;
+    double balance;
+
+    public Account(String customerName, String accountNumber, String accountType, double balance) {
+        this.customerName = customerName;
+        this.accountNumber = accountNumber;
+        this.accountType = accountType;
+        this.balance = balance;
+    }
+
+    public void deposit(double amount) {
+        balance += amount;
+        System.out.println("Deposited: " + amount);
+    }
+
+    public void displayBalance() {
+        System.out.println("Current Balance: " + balance);
+    }
+
+    public void withdraw(double amount) {
+        if (balance >= amount) {
+            balance -= amount;
+            System.out.println("Withdrawn: " + amount);
+        } else {
+            System.out.println("Insufficient Balance.");
+        }
+    }
+}
+
+class CurrentAccount extends Account {
+    double minimumBalance = 1000;
+    double penalty = 100;
+
+    public CurrentAccount(String customerName, String accountNumber, double balance) {
+        super(customerName, accountNumber, "Current", balance);
+    }
+
+    public void checkMinimumBalance() {
+        if (balance < minimumBalance) {
+            balance -= penalty;
+            System.out.println("Minimum balance penalty imposed: " + penalty);
+        }
+    }
+
+    @Override
+    public void withdraw(double amount){
+        if(balance - amount >= -minimumBalance){
+            super.withdraw(amount);
+        } else {
+            System.out.println("Withdrawal exceeds overdraft limit.");
+        }
+    }
+}
+
+class SavingsAccount extends Account {
+    double interestRate = 0.04;
+
+    public SavingsAccount(String customerName, String accountNumber, double balance) {
+        super(customerName, accountNumber, "Savings", balance);
+    }
+
+    public void computeAndDepositInterest() {
+        double interest = balance * interestRate;
+        deposit(interest);
+        System.out.println("Interest deposited: " + interest);
+    }
+}
+
+public class AccountTest {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        CurrentAccount currentAccount = new CurrentAccount("Alice", "CA123", 5000);
+        SavingsAccount savingsAccount = new SavingsAccount("Bob", "SA456", 10000);
+
+        System.out.println("Current Account:");
+        currentAccount.displayBalance();
+        currentAccount.deposit(2000);
+        currentAccount.displayBalance();
+        currentAccount.withdraw(3000);
+        currentAccount.displayBalance();
+        currentAccount.checkMinimumBalance();
+        currentAccount.displayBalance();
+        currentAccount.withdraw(5000);
+        currentAccount.displayBalance();
+
+        System.out.println("\nSavings Account:");
+        savingsAccount.displayBalance();
+        savingsAccount.deposit(3000);
+        savingsAccount.displayBalance();
+        savingsAccount.computeAndDepositInterest();
+        savingsAccount.displayBalance();
+        savingsAccount.withdraw(2000);
+        savingsAccount.displayBalance();
+    }
+}
+Output:
+
+Current Account:
+Current Balance: 5000.0
+Deposited: 2000.0
+Current Balance: 7000.0
+Withdrawn: 3000.0
+Current Balance: 4000.0
+Current Balance: 4000.0
+Withdrawn: 5000.0
+Withdrawal exceeds overdraft limit.
+Current Balance: 4000.0
+
+Savings Account:
+Current Balance: 10000.0
+Deposited: 3000.0
+Current Balance: 13000.0
+Deposited: 520.0
+Interest deposited: 520.0
+Current Balance: 13520.0
+Withdrawn: 2000.0
+Current Balance: 11520.0
+*/
