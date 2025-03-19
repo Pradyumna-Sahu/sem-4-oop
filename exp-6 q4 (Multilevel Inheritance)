@@ -1,0 +1,47 @@
+/* JAVA Program to Define a class point, inherit class line from point, rectangle from line, and cube from rectangle.
+Write no argument constructor in each class. Write a print statement in these constructors
+mentioning which class it is. Create an object of the cube class in the main method of a separate
+class called test and show the output.
+*/
+
+// Point.java
+public class Point {
+    public Point() {
+        System.out.println("in class point");
+    }
+}
+
+// Line.java
+public class Line extends Point {
+    public Line() {
+        System.out.println("in class line");
+    }
+}
+
+// Rectangle.java
+public class Rectangle extends Line {
+    public Rectangle() {
+        System.out.println("in class rectangle");
+    }
+}
+
+// Cube.java
+public class Cube extends Rectangle {
+    public Cube() {
+        System.out.println("in class cube");
+    }
+}
+
+// Test.java
+public class Test {
+    public static void main(String[] args) {
+        Cube cube = new Cube();
+    }
+}
+
+/* OUTPUT
+in class point
+in class line
+in class rectangle
+in class cube
+*/
