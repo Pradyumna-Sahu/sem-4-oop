@@ -1,0 +1,116 @@
+/* JAVA Program to Create a class Mamal with a method show(). Inherit the Mamal class to Man, Dog, Elephant,
+Rabbit. Inherited classes must have string member name and two constructors (default &
+parameterized). Implement the method overriding show().
+*/
+
+// Mamal.java
+public class Mamal {
+    public void show() {
+        System.out.println("This is a Mamal.");
+    }
+}
+
+// Man.java
+public class Man extends Mamal {
+    String name;
+
+    public Man() {
+        this.name = "Unknown Man";
+    }
+
+    public Man(String name) {
+        this.name = name;
+    }
+
+    public void show() {
+        System.out.println("This is a Man named " + name + ".");
+    }
+}
+
+// Dog.java
+public class Dog extends Mamal {
+    String name;
+
+    public Dog() {
+        this.name = "Unknown Dog";
+    }
+
+    public Dog(String name) {
+        this.name = name;
+    }
+
+    public void show() {
+        System.out.println("This is a Dog named " + name + ".");
+    }
+}
+
+// Elephant.java
+public class Elephant extends Mamal {
+    String name;
+
+    public Elephant() {
+        this.name = "Unknown Elephant";
+    }
+
+    public Elephant(String name) {
+        this.name = name;
+    }
+
+    public void show() {
+        System.out.println("This is an Elephant named " + name + ".");
+    }
+}
+
+// Rabbit.java
+public class Rabbit extends Mamal {
+    String name;
+
+    public Rabbit() {
+        this.name = "Unknown Rabbit";
+    }
+
+    public Rabbit(String name) {
+        this.name = name;
+    }
+
+    public void show() {
+        System.out.println("This is a Rabbit named " + name + ".");
+    }
+}
+
+// Main.java (or whatever you want to call the class with main)
+public class Main {
+    public static void main(String[] args) {
+        Mamal mamal = new Mamal();
+        Man man1 = new Man();
+        Man man2 = new Man("John");
+        Dog dog1 = new Dog();
+        Dog dog2 = new Dog("Buddy");
+        Elephant elephant1 = new Elephant();
+        Elephant elephant2 = new Elephant("Dumbo");
+        Rabbit rabbit1 = new Rabbit();
+        Rabbit rabbit2 = new Rabbit("Bugs");
+
+        mamal.show();
+        man1.show();
+        man2.show();
+        dog1.show();
+        dog2.show();
+        elephant1.show();
+        elephant2.show();
+        rabbit1.show();
+        rabbit2.show();
+    }
+}
+
+/* OUTPUT
+This is a Mamal.
+This is a Man named Unknown Man.
+This is a Man named John.
+This is a Dog named Unknown Dog.
+This is a Dog named Buddy.
+This is an Elephant named Unknown Elephant.
+This is an Elephant named Dumbo.
+This is a Rabbit named Unknown Rabbit.
+This is a Rabbit named Bugs.
+*/
