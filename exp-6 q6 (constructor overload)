@@ -1,0 +1,74 @@
+/* JAVA Program to create a Person class having name, age and gender as instance variables. Display the
+properties of Person class object with suitable overloaded constructors:
+a) First with no-argument.
+b) Second with three arguments for passing name, age and gender.
+c) Third with object as parameter to create a new copy of an existing Person object. 
+*/
+
+public class Person {
+    private String name;
+    private int age;
+    private String gender;
+
+    // a) No-argument constructor
+    public Person() {
+        this.name = "Unknown";
+        this.age = 0;
+        this.gender = "Unknown";
+    }
+
+    // b) Constructor with three arguments
+    public Person(String name, int age, String gender) {
+        this.name = name;
+        this.age = age;
+        this.gender = gender;
+    }
+
+    // c) Copy constructor
+    public Person(Person otherPerson) {
+        this.name = otherPerson.name;
+        this.age = otherPerson.age;
+        this.gender = otherPerson.gender;
+    }
+
+    // Method to display the properties of the Person object
+    public void displayPersonDetails() {
+        System.out.println("Name: " + this.name);
+        System.out.println("Age: " + this.age);
+        System.out.println("Gender: " + this.gender);
+    }
+
+    public static void main(String[] args) {
+        // Creating Person objects using different constructors
+        Person person1 = new Person();
+        Person person2 = new Person("Alice", 30, "Female");
+        Person person3 = new Person(person2); // Copy constructor
+
+        // Displaying the properties of the Person objects
+        System.out.println("Person 1 Details:");
+        person1.displayPersonDetails();
+
+        System.out.println("\nPerson 2 Details:");
+        person2.displayPersonDetails();
+
+        System.out.println("\nPerson 3 Details (Copy of Person 2):");
+        person3.displayPersonDetails();
+    }
+}
+
+/* OUTPUT
+Person 1 Details:
+Name: Unknown
+Age: 0
+Gender: Unknown
+
+Person 2 Details:
+Name: Alice
+Age: 30
+Gender: Female
+
+Person 3 Details (Copy of Person 2):
+Name: Alice
+Age: 30
+Gender: Female
+*/
