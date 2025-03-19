@@ -1,0 +1,12 @@
+/* JAVA Program to Create a student class with member function getdata() and show(). Create derived classes
+GradStudent and UGStudent from the student class and override both the member functions of the
+class. Student class must have rollno,fname,lname,branch fields. GradStudent must have an extra
+field specialization and UGStudent should have an extra field Elective that stores the name of the
+elective paper opted for.
+*/
+
+
+
+/* OUTPUT
+
+*/
