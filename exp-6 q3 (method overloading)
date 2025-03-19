@@ -1,0 +1,52 @@
+// JAVA Program to find the revers of the string and number by using overloading methods.
+
+import java.util.*;
+
+public class Main{
+
+    // Method to reverse a string
+    public String reverse(String str) {
+        String reversedString = "";
+        for (int i = str.length() - 1; i >= 0; i--) {
+            reversedString += str.charAt(i);
+        }
+        return reversedString;
+    }
+
+    // Method to reverse a number
+    public int reverse(int num) {
+        int reversedNumber = 0;
+        while (num != 0) {
+            int digit = num % 10;          // Get the last digit
+            reversedNumber = reversedNumber * 10 + digit;  // Add the digit to the reversed number
+            num /= 10;                      // Remove the last digit
+        }
+        return reversedNumber;
+    }
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        Main reverseObj = new Main();
+
+        // Reverse a string
+        System.out.print("Enter a string to reverse: ");
+        String inputString = sc.nextLine();
+        String reversedString = reverseObj.reverse(inputString);
+        System.out.println("Reversed String: " + reversedString);
+
+        // Reverse a number
+        System.out.print("Enter a number to reverse: ");
+        int inputNumber = sc.nextInt();
+        int reversedNumber = reverseObj.reverse(inputNumber);
+        System.out.println("Reversed Number: " + reversedNumber);
+
+    }
+}
+
+/* OUTPUT
+Enter a string to reverse: HELLO
+Reversed String: OLLEH
+Enter a number to reverse: 12345
+Reversed Number: 54321
+*/
