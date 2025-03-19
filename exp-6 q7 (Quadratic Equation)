@@ -1,0 +1,58 @@
+/* JAVA Program that prints real solutions to the quadratic equation ax2+bx+c=0. Implement a class
+QuadraticEquation whose constructor receives the coefficients a, b, c. Define a method
+hasRealSolutions() with return type boolean, that returns false if the discriminant b2-4ac is
+negative, display a message stating that there are no real solutions otherwise call the method
+getSolution() to calculate and print the solutions, using the quadratic formula.
+*/
+
+public class QuadraticEquation {
+    private double a;
+    private double b;
+    private double c;
+
+    public QuadraticEquation(double a, double b, double c) {
+        this.a = a;
+        this.b = b;
+        this.c = c;
+    }
+
+    public boolean hasRealSolutions() {
+        double discriminant = b * b - 4 * a * c;
+        if (discriminant < 0) {
+            System.out.println("No real solutions.");
+            return false;
+        } else {
+            getSolutions(discriminant);
+            return true;
+        }
+    }
+
+    private void getSolutions(double discriminant) {
+        double root1 = (-b + Math.sqrt(discriminant)) / (2 * a);
+        double root2 = (-b - Math.sqrt(discriminant)) / (2 * a);
+
+        if (discriminant == 0) {
+            System.out.println("One real solution: " + root1);
+        } else {
+            System.out.println("Two real solutions: " + root1 + " and " + root2);
+        }
+    }
+
+    public static void main(String[] args) {
+        // Example usage:
+        QuadraticEquation equation1 = new QuadraticEquation(1, -3, 2); // Two real solutions
+        equation1.hasRealSolutions();
+
+        QuadraticEquation equation2 = new QuadraticEquation(1, 2, 1); // One real solution
+        equation2.hasRealSolutions();
+
+        QuadraticEquation equation3 = new QuadraticEquation(1, 1, 1); // No real solutions
+        equation3.hasRealSolutions();
+    }
+}
+
+/* OUTPUT
+Two real solutions: 2.0 and 1.0
+One real solution: -1.0
+No real solutions.
+*/
