@@ -1,0 +1,74 @@
+/* JAVA Program to Create a class Patient that stores the patient name and the disease of the patient. From this class
+derive two classes: In_patient which has a data member room_rent and Out_patient which has a
+data member OPD_charges. Each of these three classes should have a constructor and a putdata()
+function to display its data. Write a main() program to test In_patient and Out_patient classes by
+creating instances of them and then display it.
+*/
+
+class Patient {
+    String patientName;
+    String disease;
+
+    public Patient(String name, String disease) {
+        this.patientName = name;
+        this.disease = disease;
+    }
+
+    public void putData() {
+        System.out.println("Patient Name: " + patientName);
+        System.out.println("Disease: " + disease);
+    }
+}
+
+class InPatient extends Patient {
+    double roomRent;
+
+    public InPatient(String name, String disease, double roomRent) {
+        super(name, disease);
+        this.roomRent = roomRent;
+    }
+
+    public void putData() {
+        super.putData();
+        System.out.println("Room Rent: " + roomRent);
+    }
+}
+
+class OutPatient extends Patient {
+    double OPDCharges;
+
+    public OutPatient(String name, String disease, double OPDCharges) {
+        super(name, disease);
+        this.OPDCharges = OPDCharges;
+    }
+
+    public void putData() {
+        super.putData();
+        System.out.println("OPD Charges: " + OPDCharges);
+    }
+}
+
+public class PatientTest {
+    public static void main(String[] args) {
+        InPatient inPatient = new InPatient("John Doe", "Pneumonia", 150.0);
+        OutPatient outPatient = new OutPatient("Jane Smith", "Common Cold", 50.0);
+
+        System.out.println("In-Patient Details:");
+        inPatient.putData();
+
+        System.out.println("\nOut-Patient Details:");
+        outPatient.putData();
+    }
+}
+
+/* OUTPUT
+In-Patient Details:
+Patient Name: John Doe
+Disease: Pneumonia
+Room Rent: 150.0
+
+Out-Patient Details:
+Patient Name: Jane Smith
+Disease: Common Cold
+OPD Charges: 50.0
+*/
