@@ -1,0 +1,54 @@
+/* JAVA Program to Create two interfaces Animal with method running() and bird with method flying(). Animal has
+four legs and bird has two legs. Implement the two interfaces to create a class FlyingTiger having
+6 legs and so it’s use.
+*/
+
+interface Animal {
+    int legs = 4; // Default to 4 legs
+    void running();
+}
+
+interface Bird {
+    int legs = 2; // Default to 2 legs
+    void flying();
+}
+
+class FlyingTiger implements Animal, Bird {
+    int legs = 6; // FlyingTiger has 6 legs
+
+    @Override
+    public void running() {
+        System.out.println("FlyingTiger is running with " + legs + " legs.");
+    }
+
+    @Override
+    public void flying() {
+        System.out.println("FlyingTiger is flying.");
+    }
+
+    public void combinedAction() {
+        System.out.println("FlyingTiger is running and flying with " + legs + " legs.");
+    }
+}
+
+public class FlyingTigerDemo {
+    public static void main(String[] args) {
+        FlyingTiger ft = new FlyingTiger();
+        ft.running();
+        ft.flying();
+        ft.combinedAction();
+
+        // Accessing interface constants (though not the FlyingTiger's legs)
+        System.out.println("An animal has " + Animal.legs + " legs.");
+        System.out.println("A bird has " + Bird.legs + " legs.");
+
+    }
+}
+
+/* OUTPUT
+FlyingTiger is running with 6 legs.
+FlyingTiger is flying.
+FlyingTiger is running and flying with 6 legs.
+An animal has 4 legs.
+A bird has 2 legs.
+*/
