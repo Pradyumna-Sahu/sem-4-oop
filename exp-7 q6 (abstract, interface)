@@ -1,0 +1,97 @@
+/* JAVA Program to Write a program to maintain University marking Database.
+Student is Abstract class, it has Roll no., Name, subject_1_mark attributes.
+show_student_data() is abstract method, get_student_data() is non abstract method.
+ISport is an Interface, having attribute sport_grace_marks=5.
+show_sport_mark() is a method.
+IExService_Man is an Interface, having attribute ExService_Man_grace_marks=10.
+show_ExService_Man_mark() is a method.
+Result is Class, it is inherited from Student, ISport, IExService_Man.
+Total_marks=subject_1_mark + sport_grace_marks + ExService_Man_grace_marks.
+Show_result() is method of Result class.
+*/
+
+import java.util.Scanner;
+
+abstract class Student {
+    int rollNo;
+    String name;
+    int subject_1_mark;
+
+    abstract void show_student_data();
+
+    void get_student_data() {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Enter Roll No: ");
+        rollNo = scanner.nextInt();
+        scanner.nextLine(); // Consume newline
+        System.out.print("Enter Name: ");
+        name = scanner.nextLine();
+        System.out.print("Enter Subject 1 Marks: ");
+        subject_1_mark = scanner.nextInt();
+    }
+}
+
+interface ISport {
+    int sport_grace_marks = 5;
+    void show_sport_mark();
+}
+
+interface IExService_Man {
+    int ExService_Man_grace_marks = 10;
+    void show_ExService_Man_mark();
+}
+
+class Result extends Student implements ISport, IExService_Man {
+    int total_marks;
+
+    @Override
+    void show_student_data() {
+        System.out.println("Roll No: " + rollNo);
+        System.out.println("Name: " + name);
+        System.out.println("Subject 1 Marks: " + subject_1_mark);
+    }
+
+    @Override
+    public void show_sport_mark() {
+        System.out.println("Sport Grace Marks: " + sport_grace_marks);
+    }
+
+    @Override
+    public void show_ExService_Man_mark() {
+        System.out.println("Ex-Service Man Grace Marks: " + ExService_Man_grace_marks);
+    }
+
+    void show_result() {
+        total_marks = subject_1_mark + sport_grace_marks + ExService_Man_grace_marks;
+        System.out.println("Total Marks: " + total_marks);
+    }
+}
+
+public class UniversityMarkingDatabase {
+    public static void main(String[] args) {
+        Result result = new Result();
+        result.get_student_data();
+
+        System.out.println("\nStudent Data:");
+        result.show_student_data();
+
+        result.show_sport_mark();
+        result.show_ExService_Man_mark();
+
+        result.show_result();
+    }
+}
+
+/* OUTPUT
+Enter Roll No: 1
+Enter Name: John Doe
+Enter Subject 1 Marks: 85
+
+Student Data:
+Roll No: 1
+Name: John Doe
+Subject 1 Marks: 85
+Sport Grace Marks: 5
+Ex-Service Man Grace Marks: 10
+Total Marks: 100
+*/
