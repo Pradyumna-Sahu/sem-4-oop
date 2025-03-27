@@ -1,0 +1,133 @@
+/* JAVA Program to Define an abstract class “Staff” with members name and address. Define two subclasses of this
+class – “FullTimeStaff” (department, salary) and “PartTimeStaff” (numberof- hours, rate-per-hour). 
+Define appropriate constructors. Create n objects which could be of either FullTimeStaff or
+PartTimeStaff class by asking the user’s choice. Display details of all “FullTimeStaff” objects and
+all “PartTimeStaff” objects.
+*/
+
+import java.util.Scanner;
+
+abstract class Staff {
+    String name;
+    String address;
+
+    Staff(String name, String address) {
+        this.name = name;
+        this.address = address;
+    }
+
+    abstract void displayDetails();
+}
+
+class FullTimeStaff extends Staff {
+    String department;
+    double salary;
+
+    FullTimeStaff(String name, String address, String department, double salary) {
+        super(name, address);
+        this.department = department;
+        this.salary = salary;
+    }
+
+    @Override
+    void displayDetails() {
+        System.out.println("Name: " + name + ", Address: " + address + ", Department: " + department + ", Salary: " + salary);
+    }
+}
+
+class PartTimeStaff extends Staff {
+    int numberOfHours;
+    double ratePerHour;
+
+    PartTimeStaff(String name, String address, int numberOfHours, double ratePerHour) {
+        super(name, address);
+        this.numberOfHours = numberOfHours;
+        this.ratePerHour = ratePerHour;
+    }
+
+    @Override
+    void displayDetails() {
+        System.out.println("Name: " + name + ", Address: " + address + ", Number of hours: " + numberOfHours + ", Rate per hour: " + ratePerHour);
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("How many objects you want to create: ");
+        int n = scanner.nextInt();
+        scanner.nextLine(); // Consume newline
+
+        Staff[] staffs = new Staff[n];
+
+        for (int i = 0; i < n; i++) {
+            System.out.println("Enter details of staff " + (i + 1) + " -");
+            System.out.print("Enter 1 for full time staff and 2 for part time staff: ");
+            int choice = scanner.nextInt();
+            scanner.nextLine(); // Consume newline
+
+            System.out.print("Enter name: ");
+            String name = scanner.nextLine();
+            System.out.print("Enter address: ");
+            String address = scanner.nextLine();
+
+            if (choice == 1) {
+                System.out.print("Enter department: ");
+                String department = scanner.nextLine();
+                System.out.print("Enter salary: ");
+                double salary = scanner.nextDouble();
+                scanner.nextLine(); // Consume newline
+                staffs[i] = new FullTimeStaff(name, address, department, salary);
+            } else if (choice == 2) {
+                System.out.print("Enter number of hours: ");
+                int numberOfHours = scanner.nextInt();
+                System.out.print("Enter rate per hour: ");
+                double ratePerHour = scanner.nextDouble();
+                scanner.nextLine(); // Consume newline
+                staffs[i] = new PartTimeStaff(name, address, numberOfHours, ratePerHour);
+            } else {
+                System.out.println("Invalid choice. Staff creation skipped.");
+                i--; // Decrement i to re-enter details for this staff
+            }
+        }
+
+        System.out.println("Total number of staff: " + n);
+
+        System.out.println("Details of full time staff:");
+        for (Staff staff : staffs) {
+            if (staff instanceof FullTimeStaff) {
+                staff.displayDetails();
+            }
+        }
+
+        System.out.println("Details of part time staff:");
+        for (Staff staff : staffs) {
+            if (staff instanceof PartTimeStaff) {
+                staff.displayDetails();
+            }
+        }
+
+        scanner.close();
+    }
+}
+
+/* OUTPUT
+How many objects you want to create: 2
+Enter details of staff 1 -
+Enter 1 for full time staff and 2 for part time staff: 1
+Enter name: Akshay
+Enter address: lochapoda
+Enter department: Logistics
+Enter salary: 23500
+Enter details of staff 2 -
+Enter 1 for full time staff and 2 for part time staff: 2
+Enter name: Sagar
+Enter address: Andra side
+Enter number of hours: 10
+Enter rate per hour: 2000
+Total number of staff: 2
+Details of full time staff:
+Name: Akshay, Address: lochapoda, Department: Logistics, Salary: 23500.0
+Details of part time staff:
+Name: Sagar, Address: Andra side, Number of hours: 10, Rate per hour: 2000.0
+*/
