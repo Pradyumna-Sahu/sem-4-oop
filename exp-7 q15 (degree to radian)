@@ -1,0 +1,41 @@
+/* JAVA Program to Write a program to do the following job. For a given θ in degrees, convert it to radian. Find sin and
+cos of that angle. Verify sin^2θ + cos^2θ = 1 by pow() method.
+*/
+
+public class Trigonometry {
+
+    public static void main(String[] args) {
+        double thetaDegrees = 45; // Input angle in degrees
+
+        // Convert degrees to radians
+        double thetaRadians = Math.toRadians(thetaDegrees);
+
+        // Calculate sin and cos
+        double sinTheta = Math.sin(thetaRadians);
+        double cosTheta = Math.cos(thetaRadians);
+
+        // Verify sin^2(theta) + cos^2(theta) = 1
+        double result = Math.pow(sinTheta, 2) + Math.pow(cosTheta, 2);
+
+        // Output
+        System.out.println("θ in degrees : " + thetaDegrees);
+        System.out.println("θ in radians : " + String.format("%.6f", thetaRadians)); //Format to 6 decimal places.
+        System.out.println("sin (" + (int)thetaDegrees + ") : " + String.format("%.6f", sinTheta)); //Format to 6 decimal places.
+        System.out.println("cos (" + (int)thetaDegrees + ") : " + String.format("%.6f", cosTheta)); //Format to 6 decimal places.
+
+        //check for rounding errors.
+        if (Math.abs(result-1.0) < 1e-10){
+            System.out.println("Given equation proved.");
+        } else {
+            System.out.println("Given equation did not prove.");
+        }
+    }
+}
+
+/* OUTPUT
+θ in degrees : 45.0
+θ in radians : 0.785398
+sin (45) : 0.707107
+cos (45) : 0.707107
+Given equation proved.
+*/
