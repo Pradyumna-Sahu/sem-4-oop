@@ -1,0 +1,42 @@
+/* JAVA Program to Create an Animal class and a Mammal class extends from Animal class. Use the abstract keyword
+for Animal class which must contain a concrete method and an abstract method. 
+*/
+
+abstract class Animal {
+    // Concrete method
+    public void eat() {
+        System.out.println("Animal is eating.");
+    }
+
+    // Abstract method
+    public abstract void makeSound();
+}
+
+class Mammal extends Animal {
+    @Override
+    public void makeSound() {
+        System.out.println("Mammal makes a sound.");
+    }
+
+    public void giveBirth() {
+        System.out.println("Mammal gives birth.");
+    }
+}
+
+public class AnimalMammalDemo {
+    public static void main(String[] args) {
+        Mammal mammal = new Mammal();
+        mammal.eat();
+        mammal.makeSound();
+        mammal.giveBirth();
+
+        // You cannot directly create an instance of Animal:
+        // Animal animal = new Animal(); // This will give a compile-time error.
+    }
+}
+
+/* OUTPUT
+Animal is eating.
+Mammal makes a sound.
+Mammal gives birth.
+*/
