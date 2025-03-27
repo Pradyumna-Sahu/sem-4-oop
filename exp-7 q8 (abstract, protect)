@@ -1,0 +1,54 @@
+/* JAVA Program to Create an abstract class called figure which contains a pure virtual function called find_area() and
+a protected attribute named as area. Create two new derived classes from the above class named as
+circle and square having double type attribute named as radius and side respectively. Implement
+dynamic polymorphism to find out area of a circle and a square and show the result. 
+*/
+
+abstract class Figure {
+    protected double area;
+
+    abstract double find_area();
+}
+
+class Circle extends Figure {
+    double radius;
+
+    Circle(double radius) {
+        this.radius = radius;
+    }
+
+    @Override
+    double find_area() {
+        area = Math.PI * radius * radius;
+        return area;
+    }
+}
+
+class Square extends Figure {
+    double side;
+
+    Square(double side) {
+        this.side = side;
+    }
+
+    @Override
+    double find_area() {
+        area = side * side;
+        return area;
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Figure circle = new Circle(5.0);
+        Figure square = new Square(4.0);
+
+        System.out.println("Area of Circle: " + circle.find_area());
+        System.out.println("Area of Square: " + square.find_area());
+    }
+}
+
+/* OUTPUT
+Area of Circle: 78.53981633974483
+Area of Square: 16.0
+*/
