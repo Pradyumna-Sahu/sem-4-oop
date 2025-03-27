@@ -1,0 +1,168 @@
+/* JAVA Program to Design a class student with roll, name and marks data. Read the 10 student details and print them
+in ascending order of roll number, name and marks using overloading methods.
+*/
+
+import java.util.Arrays;
+import java.util.Comparator;
+import java.util.Scanner;
+
+class Student {
+    int roll;
+    String name;
+    int marks;
+
+    public Student(int roll, String name, int marks) {
+        this.roll = roll;
+        this.name = name;
+        this.marks = marks;
+    }
+
+    @Override
+    public String toString() {
+        return "Roll: " + roll + ", Name: " + name + ", Marks: " + marks;
+    }
+}
+
+public class StudentSorter {
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        Student[] students = new Student[10];
+
+        // Read student details
+        for (int i = 0; i < 10; i++) {
+            System.out.println("Enter details for student " + (i + 1) + ":");
+            System.out.print("Roll: ");
+            int roll = scanner.nextInt();
+            scanner.nextLine(); // Consume newline
+            System.out.print("Name: ");
+            String name = scanner.nextLine();
+            System.out.print("Marks: ");
+            int marks = scanner.nextInt();
+            students[i] = new Student(roll, name, marks);
+            scanner.nextLine(); // consume new line.
+        }
+
+        // Sort by Roll Number
+        System.out.println("\nSorted by Roll Number:");
+        sortStudents(students, 1);
+
+        // Sort by Name
+        System.out.println("\nSorted by Name:");
+        sortStudents(students, 2);
+
+        // Sort by Marks
+        System.out.println("\nSorted by Marks:");
+        sortStudents(students, 3);
+
+        scanner.close();
+    }
+
+    // Overloaded method to sort students
+    public static void sortStudents(Student[] students, int sortBy) {
+        Comparator<Student> comparator;
+
+        switch (sortBy) {
+            case 1: // Sort by Roll Number
+                comparator = Comparator.comparingInt(student -> student.roll);
+                break;
+            case 2: // Sort by Name
+                comparator = Comparator.comparing(student -> student.name);
+                break;
+            case 3: // Sort by Marks
+                comparator = Comparator.comparingInt(student -> student.marks);
+                break;
+            default:
+                comparator = Comparator.comparingInt(student -> student.roll); // Default sort by roll
+                break;
+        }
+
+        Arrays.sort(students, comparator);
+
+        for (Student student : students) {
+            System.out.println(student);
+        }
+    }
+}
+
+/* OUTPUT
+```
+Enter details for student 1:
+Roll: 101
+Name: Alice
+Marks: 85
+Enter details for student 2:
+Roll: 105
+Name: Bob
+Marks: 92
+Enter details for student 3:
+Roll: 103
+Name: Charlie
+Marks: 78
+Enter details for student 4:
+Roll: 102
+Name: David
+Marks: 95
+Enter details for student 5:
+Roll: 109
+Name: Eve
+Marks: 88
+Enter details for student 6:
+Roll: 104
+Name: Frank
+Marks: 80
+Enter details for student 7:
+Roll: 108
+Name: Grace
+Marks: 90
+Enter details for student 8:
+Roll: 106
+Name: Henry
+Marks: 83
+Enter details for student 9:
+Roll: 107
+Name: Ivy
+Marks: 75
+Enter details for student 10:
+Roll: 110
+Name: Jack
+Marks: 98
+
+Sorted by Roll Number:
+Roll: 101, Name: Alice, Marks: 85
+Roll: 102, Name: David, Marks: 95
+Roll: 103, Name: Charlie, Marks: 78
+Roll: 104, Name: Frank, Marks: 80
+Roll: 105, Name: Bob, Marks: 92
+Roll: 106, Name: Henry, Marks: 83
+Roll: 107, Name: Ivy, Marks: 75
+Roll: 108, Name: Grace, Marks: 90
+Roll: 109, Name: Eve, Marks: 88
+Roll: 110, Name: Jack, Marks: 98
+
+Sorted by Name:
+Roll: 101, Name: Alice, Marks: 85
+Roll: 105, Name: Bob, Marks: 92
+Roll: 103, Name: Charlie, Marks: 78
+Roll: 102, Name: David, Marks: 95
+Roll: 109, Name: Eve, Marks: 88
+Roll: 104, Name: Frank, Marks: 80
+Roll: 108, Name: Grace, Marks: 90
+Roll: 106, Name: Henry, Marks: 83
+Roll: 107, Name: Ivy, Marks: 75
+Roll: 110, Name: Jack, Marks: 98
+
+Sorted by Marks:
+Roll: 107, Name: Ivy, Marks: 75
+Roll: 103, Name: Charlie, Marks: 78
+Roll: 104, Name: Frank, Marks: 80
+Roll: 106, Name: Henry, Marks: 83
+Roll: 101, Name: Alice, Marks: 85
+Roll: 109, Name: Eve, Marks: 88
+Roll: 108, Name: Grace, Marks: 90
+Roll: 105, Name: Bob, Marks: 92
+Roll: 102, Name: David, Marks: 95
+Roll: 110, Name: Jack, Marks: 98
+```
+
+*/
