@@ -1,0 +1,62 @@
+/* JAVA Program to Create a class Sum under a package sumpack, Sub under a package subpack which is inside
+sumpack. Create another class Mul which is inside mulpack. These classes perform the respective
+arithmetic operations on integer nos. create a class Test to perform addition, subtraction and
+multiplication by creating the object of respective classes.
+*/
+
+// sumpack/Sum.java
+package sumpack;
+
+public class Sum {
+    public int add(int a, int b) {
+        return a + b;
+    }
+}
+
+// sumpack/subpack/Sub.java
+package sumpack.subpack;
+
+public class Sub {
+    public int subtract(int a, int b) {
+        return a - b;
+    }
+}
+
+// mulpack/Mul.java
+package mulpack;
+
+public class Mul {
+    public int multiply(int a, int b) {
+        return a * b;
+    }
+}
+
+// Test.java
+import sumpack.Sum;
+import sumpack.subpack.Sub;
+import mulpack.Mul;
+
+public class Test {
+    public static void main(String[] args) {
+        int a = 10;
+        int b = 20;
+
+        Sum sum = new Sum();
+        Sub sub = new Sub();
+        Mul mul = new Mul();
+
+        int sumResult = sum.add(a, b);
+        int subResult = sub.subtract(a, b);
+        int mulResult = mul.multiply(a, b);
+
+        System.out.println("By calling sum method from sumpack, result= " + sumResult);
+        System.out.println("By calling sub method from subpack, which is inside sumpack, result= " + subResult);
+        System.out.println("By calling mul method from mulpack, result= " + mulResult);
+    }
+}
+
+/* OUTPUT
+By calling sum method from sumpack, result= 30
+By calling sub method from subpack, which is inside sumpack, result= -10
+By calling mul method from mulpack, result= 200
+*/
