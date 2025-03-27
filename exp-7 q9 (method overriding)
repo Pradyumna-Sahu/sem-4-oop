@@ -1,0 +1,87 @@
+/* JAVA Program to Create base class called shape. Use this class to store 2 double type values that could be used to
+compute the area of figures. Derive 2 specific classes called triangle and rectangle from the base
+shape. Add to the base class, a member function get_data() to initialize the base class data
+members and another member function display_area() to compute and display the area of figures.
+Make display_area() as a virtual function and re-define this function in the derived classes to suit
+their requirement. Using these three classes, design a program that will accept dimensions of a 
+triangle or a rectangle interactively, and display the area. The two values given as input will be
+treated as lengths of two sides in case of rectangles, and as base and height in the case of triangles.
+*/
+
+import java.util.Scanner;
+
+class Shape {
+    double dim1;
+    double dim2;
+
+    void get_data() {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Enter dimension 1: ");
+        dim1 = scanner.nextDouble();
+        System.out.print("Enter dimension 2: ");
+        dim2 = scanner.nextDouble();
+    }
+
+    double display_area() {
+        System.out.println("Area (Shape): Not defined");
+        return 0.0;
+    }
+}
+
+class Triangle extends Shape {
+    @Override
+    double display_area() {
+        double area = 0.5 * dim1 * dim2;
+        System.out.println("Area of Triangle: " + area);
+        return area;
+    }
+}
+
+class Rectangle extends Shape {
+    @Override
+    double display_area() {
+        double area = dim1 * dim2;
+        System.out.println("Area of Rectangle: " + area);
+        return area;
+    }
+}
+
+public class AreaCalculator {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.print("Enter 't' for triangle or 'r' for rectangle: ");
+        String choice = scanner.nextLine();
+
+        Shape shape;
+
+        if (choice.equalsIgnoreCase("t")) {
+            shape = new Triangle();
+        } else if (choice.equalsIgnoreCase("r")) {
+            shape = new Rectangle();
+        } else {
+            System.out.println("Invalid choice.");
+            return;
+        }
+
+        shape.get_data();
+        shape.display_area();
+
+        scanner.close();
+    }
+}
+
+/* OUTPUT
+Enter 't' for triangle or 'r' for rectangle: t
+Enter dimension 1: 5
+Enter dimension 2: 10
+Area of Triangle: 25.0
+
+Enter 't' for triangle or 'r' for rectangle: r
+Enter dimension 1: 5
+Enter dimension 2: 10
+Area of Rectangle: 50.0
+
+Enter 't' for triangle or 'r' for rectangle: x
+Invalid choice.
+*/
