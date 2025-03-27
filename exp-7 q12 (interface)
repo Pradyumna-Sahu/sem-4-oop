@@ -1,0 +1,81 @@
+/* JAVA Program to Create a two interfaces of Subsum, Muldiv. Subsum have method of sub() and sum(). Muldiv
+extends Subsum with having methods mul() and div(). Also create a class Arithmetic
+implementing the Muldiv interfaces having its own method mod().
+*/
+
+interface Subsum {
+    int sub(int a, int b);
+    int sum(int a, int b);
+}
+
+interface Muldiv extends Subsum {
+    int mul(int a, int b);
+    double div(int a, int b);
+}
+
+class Arithmetic implements Muldiv {
+
+    @Override
+    public int sub(int a, int b) {
+        return a - b;
+    }
+
+    @Override
+    public int sum(int a, int b) {
+        return a + b;
+    }
+
+    @Override
+    public int mul(int a, int b) {
+        return a * b;
+    }
+
+    @Override
+    public double div(int a, int b) {
+        if (b == 0) {
+            System.out.println("Division by zero!");
+            return Double.NaN; // Not a Number
+        }
+        return (double) a / b;
+    }
+
+    public int mod(int a, int b) {
+        if (b == 0) {
+            System.out.println("Modulo by zero!");
+            return 0;
+        }
+        return a % b;
+    }
+}
+
+public class ArithmeticDemo {
+    public static void main(String[] args) {
+        Arithmetic arithmetic = new Arithmetic();
+
+        int a = 10;
+        int b = 5;
+
+        System.out.println("Sum: " + arithmetic.sum(a, b));
+        System.out.println("Subtraction: " + arithmetic.sub(a, b));
+        System.out.println("Multiplication: " + arithmetic.mul(a, b));
+        System.out.println("Division: " + arithmetic.div(a, b));
+        System.out.println("Modulo: " + arithmetic.mod(a, b));
+
+        // Test division by zero
+        int c = 10;
+        int d = 0;
+
+        System.out.println("Division by zero test:" + arithmetic.div(c,d));
+        System.out.println("Modulo by zero test: " + arithmetic.mod(c, d));
+    }
+}
+
+/* OUTPUT
+Sum: 15
+Subtraction: 5
+Multiplication: 50
+Division: 2.0
+Modulo: 0
+Division by zero test:NaN
+Modulo by zero test: 0
+*/
