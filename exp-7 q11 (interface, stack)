@@ -1,0 +1,233 @@
+/* JAVA Program to Define an interface “QueueOperations” which declares methods for a static queue. Define a class
+“MyQueue” which contains an array and front and rear as data members and implements the above
+interface. Initialize the queue using a constructor. Write a menu driven program to perform
+operations on a queue object.
+*/
+
+import java.util.Scanner;
+
+interface QueueOperations {
+    void enqueue(int item);
+    int dequeue();
+    int peek();
+    boolean isEmpty();
+    boolean isFull();
+}
+
+class MyQueue implements QueueOperations {
+    private int[] queue;
+    private int front;
+    private int rear;
+    private int capacity;
+
+    public MyQueue(int capacity) {
+        this.capacity = capacity;
+        this.queue = new int[capacity];
+        this.front = 0;
+        this.rear = -1;
+    }
+
+    @Override
+    public void enqueue(int item) {
+        if (isFull()) {
+            System.out.println("Queue Overflow");
+            return;
+        }
+        rear = (rear + 1) % capacity;
+        queue[rear] = item;
+        System.out.println(item + " enqueued");
+    }
+
+    @Override
+    public int dequeue() {
+        if (isEmpty()) {
+            System.out.println("Queue Underflow");
+            return -1; // Or throw an exception
+        }
+        int item = queue[front];
+        front = (front + 1) % capacity;
+        return item;
+    }
+
+    @Override
+    public int peek() {
+        if (isEmpty()) {
+            System.out.println("Queue is empty");
+            return -1; // Or throw an exception
+        }
+        return queue[front];
+    }
+
+    @Override
+    public boolean isEmpty() {
+        return (rear + 1) % capacity == front;
+    }
+
+    @Override
+    public boolean isFull() {
+        return (rear + 2) % capacity == front;
+    }
+}
+
+public class QueueMenu {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Enter queue capacity: ");
+        int capacity = scanner.nextInt();
+        MyQueue queue = new MyQueue(capacity);
+
+        int choice;
+        do {
+            System.out.println("\nQueue Operations Menu:");
+            System.out.println("1. Enqueue");
+            System.out.println("2. Dequeue");
+            System.out.println("3. Peek");
+            System.out.println("4. Is Empty");
+            System.out.println("5. Is Full");
+            System.out.println("6. Exit");
+            System.out.print("Enter your choice: ");
+            choice = scanner.nextInt();
+
+            switch (choice) {
+                case 1:
+                    System.out.print("Enter item to enqueue: ");
+                    int item = scanner.nextInt();
+                    queue.enqueue(item);
+                    break;
+                case 2:
+                    int dequeued = queue.dequeue();
+                    if (dequeued != -1) {
+                        System.out.println("Dequeued item: " + dequeued);
+                    }
+                    break;
+                case 3:
+                    int peeked = queue.peek();
+                    if (peeked != -1) {
+                        System.out.println("Peeked item: " + peeked);
+                    }
+                    break;
+                case 4:
+                    System.out.println("Is Empty: " + queue.isEmpty());
+                    break;
+                case 5:
+                    System.out.println("Is Full: " + queue.isFull());
+                    break;
+                case 6:
+                    System.out.println("Exiting...");
+                    break;
+                default:
+                    System.out.println("Invalid choice.");
+            }
+        } while (choice != 6);
+
+        scanner.close();
+    }
+}
+
+/* OUTPUT
+```
+Enter queue capacity: 5
+
+Queue Operations Menu:
+1. Enqueue
+2. Dequeue
+3. Peek
+4. Is Empty
+5. Is Full
+6. Exit
+Enter your choice: 1
+Enter item to enqueue: 10
+10 enqueued
+
+Queue Operations Menu:
+1. Enqueue
+2. Dequeue
+3. Peek
+4. Is Empty
+5. Is Full
+6. Exit
+Enter your choice: 1
+Enter item to enqueue: 20
+20 enqueued
+
+Queue Operations Menu:
+1. Enqueue
+2. Dequeue
+3. Peek
+4. Is Empty
+5. Is Full
+6. Exit
+Enter your choice: 3
+Peeked item: 10
+
+Queue Operations Menu:
+1. Enqueue
+2. Dequeue
+3. Peek
+4. Is Empty
+5. Is Full
+6. Exit
+Enter your choice: 2
+Dequeued item: 10
+
+Queue Operations Menu:
+1. Enqueue
+2. Dequeue
+3. Peek
+4. Is Empty
+5. Is Full
+6. Exit
+Enter your choice: 4
+Is Empty: false
+
+Queue Operations Menu:
+1. Enqueue
+2. Dequeue
+3. Peek
+4. Is Empty
+5. Is Full
+6. Exit
+Enter your choice: 6
+Exiting...
+```
+
+**Example of Queue Overflow:**
+
+If you enqueue 5 items and then try to enqueue another, you will see:
+
+```
+Enter queue capacity: 5
+
+... (enqueue 5 items) ...
+
+Queue Operations Menu:
+1. Enqueue
+2. Dequeue
+3. Peek
+4. Is Empty
+5. Is Full
+6. Exit
+Enter your choice: 1
+Enter item to enqueue: 60
+Queue Overflow
+```
+
+**Example of Queue Underflow:**
+
+If you try to dequeue an item from an empty queue, you will see:
+
+```
+Enter queue capacity: 5
+
+Queue Operations Menu:
+1. Enqueue
+2. Dequeue
+3. Peek
+4. Is Empty
+5. Is Full
+6. Exit
+Enter your choice: 2
+Queue Underflow
+```
+
+*/
