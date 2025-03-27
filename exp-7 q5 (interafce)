@@ -1,0 +1,134 @@
+/* JAVA Program to Define an interface “IntOperations” with methods to check whether an integer is positive,
+negative, even, odd, prime and operations like factorial and sum of digits. Define a class
+MyNumber having one private int data member. Write a default constructor to initialize it to 0 and
+another constructor to initialize it to a value (Use this). Implement the above interface. Create an
+object in main. Use command line arguments to pass a value to the object and perform the above
+operations using a menu.
+*/
+
+interface IntOperations {
+    boolean isPositive();
+    boolean isNegative();
+    boolean isEven();
+    boolean isOdd();
+    boolean isPrime();
+    long factorial();
+    int sumOfDigits();
+}
+
+class MyNumber implements IntOperations {
+    private int number;
+
+    public MyNumber() {
+        this.number = 0;
+    }
+
+    public MyNumber(int number) {
+        this.number = number;
+    }
+
+    @Override
+    public boolean isPositive() {
+        return number > 0;
+    }
+
+    @Override
+    public boolean isNegative() {
+        return number < 0;
+    }
+
+    @Override
+    public boolean isEven() {
+        return number % 2 == 0;
+    }
+
+    @Override
+    public boolean isOdd() {
+        return number % 2 != 0;
+    }
+
+    @Override
+    public boolean isPrime() {
+        if (number <= 1) {
+            return false;
+        }
+        for (int i = 2; i <= Math.sqrt(number); i++) {
+            if (number % i == 0) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    @Override
+    public long factorial() {
+        if (number < 0) {
+            System.out.println("Can't Found");
+            return 0; // Or throw an exception
+        }
+        if (number == 0 || number == 1) {
+            return 1;
+        }
+        long fact = 1;
+        for (int i = 2; i <= number; i++) {
+            fact *= i;
+        }
+        return fact;
+    }
+
+    @Override
+    public int sumOfDigits() {
+        int sum = 0;
+        int temp = Math.abs(number); // Handle negative numbers
+        while (temp != 0) {
+            sum += temp % 10;
+            temp /= 10;
+        }
+        return sum;
+    }
+}
+
+public class Test {
+    public static void main(String[] args) {
+        if (args.length != 1) {
+            System.out.println("Please provide one integer argument.");
+            return;
+        }
+
+        try {
+            int num = Integer.parseInt(args[0]);
+            MyNumber myNumber = new MyNumber(num);
+
+            System.out.println("Option 1 (+ve) – " + myNumber.isPositive());
+            System.out.println("Option 2 (-ve) – " + myNumber.isNegative());
+            System.out.println("Option 3 (Even) – " + myNumber.isEven());
+            System.out.println("Option 4 (Odd) – " + myNumber.isOdd());
+            System.out.println("Option 5 (Prime) – " + myNumber.isPrime());
+            System.out.println("Option 6 (Factorial) – " + myNumber.factorial());
+            System.out.println("Option 7 (Sum of digits) – " + myNumber.sumOfDigits());
+
+        } catch (NumberFormatException e) {
+            System.out.println("Invalid input. Please provide an integer argument.");
+        }
+    }
+}
+
+/* OUTPUT
+//Input1: java Test 7
+Option 1 (+ve) – true
+Option 2 (-ve) – false
+Option 3 (Even) – false
+Option 4 (Odd) – true
+Option 5 (Prime) – true
+Option 6 (Factorial) – 5040
+Option 7 (Sum of digits) – 7
+
+//Input2: java Test -12
+Option 1 (+ve) – false
+Option 2 (-ve) – true
+Option 3 (Even) – true
+Option 4 (Odd) – false
+Option 5 (Prime) – false
+Option 6 (Factorial) – Can't Found
+Option 7 (Sum of digits) – 3
+*/
