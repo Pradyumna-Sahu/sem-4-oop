@@ -1,0 +1,213 @@
+/* JAVA Program to Define an interface “StackOperations” which declares methods for a static stack. Define a class
+“MyStack” which contains an array and top as data members and implements the above interface.
+Initialize the stack using a constructor. Write a menu driven program to perform operations on a
+stack object.
+*/
+
+import java.util.Scanner;
+
+interface StackOperations {
+    void push(int item);
+    int pop();
+    int peek();
+    boolean isEmpty();
+    boolean isFull();
+}
+
+class MyStack implements StackOperations {
+    private int[] stack;
+    private int top;
+    private int capacity;
+
+    public MyStack(int capacity) {
+        this.capacity = capacity;
+        this.stack = new int[capacity];
+        this.top = -1;
+    }
+
+    @Override
+    public void push(int item) {
+        if (isFull()) {
+            System.out.println("Stack Overflow");
+            return;
+        }
+        stack[++top] = item;
+        System.out.println(item + " pushed to stack");
+    }
+
+    @Override
+    public int pop() {
+        if (isEmpty()) {
+            System.out.println("Stack Underflow");
+            return -1; // Or throw an exception
+        }
+        return stack[top--];
+    }
+
+    @Override
+    public int peek() {
+        if (isEmpty()) {
+            System.out.println("Stack is empty");
+            return -1; // Or throw an exception
+        }
+        return stack[top];
+    }
+
+    @Override
+    public boolean isEmpty() {
+        return top == -1;
+    }
+
+    @Override
+    public boolean isFull() {
+        return top == capacity - 1;
+    }
+}
+
+public class StackMenu {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Enter stack capacity: ");
+        int capacity = scanner.nextInt();
+        MyStack stack = new MyStack(capacity);
+
+        int choice;
+        do {
+            System.out.println("\nStack Operations Menu:");
+            System.out.println("1. Push");
+            System.out.println("2. Pop");
+            System.out.println("3. Peek");
+            System.out.println("4. Is Empty");
+            System.out.println("5. Is Full");
+            System.out.println("6. Exit");
+            System.out.print("Enter your choice: ");
+            choice = scanner.nextInt();
+
+            switch (choice) {
+                case 1:
+                    System.out.print("Enter item to push: ");
+                    int item = scanner.nextInt();
+                    stack.push(item);
+                    break;
+                case 2:
+                    int popped = stack.pop();
+                    if (popped != -1) {
+                        System.out.println("Popped item: " + popped);
+                    }
+                    break;
+                case 3:
+                    int peeked = stack.peek();
+                    if (peeked != -1) {
+                        System.out.println("Peeked item: " + peeked);
+                    }
+                    break;
+                case 4:
+                    System.out.println("Is Empty: " + stack.isEmpty());
+                    break;
+                case 5:
+                    System.out.println("Is Full: " + stack.isFull());
+                    break;
+                case 6:
+                    System.out.println("Exiting...");
+                    break;
+                default:
+                    System.out.println("Invalid choice.");
+            }
+        } while (choice != 6);
+
+        scanner.close();
+    }
+}
+
+/* OUTPUT
+Enter stack capacity: 5
+
+Stack Operations Menu:
+1. Push
+2. Pop
+3. Peek
+4. Is Empty
+5. Is Full
+6. Exit
+Enter your choice: 1
+Enter item to push: 10
+10 pushed to stack
+
+Stack Operations Menu:
+1. Push
+2. Pop
+3. Peek
+4. Is Empty
+5. Is Full
+6. Exit
+Enter your choice: 1
+Enter item to push: 20
+20 pushed to stack
+
+Stack Operations Menu:
+1. Push
+2. Pop
+3. Peek
+4. Is Empty
+5. Is Full
+6. Exit
+Enter your choice: 3
+Peeked item: 20
+
+Stack Operations Menu:
+1. Push
+2. Pop
+3. Peek
+4. Is Empty
+5. Is Full
+6. Exit
+Enter your choice: 2
+Popped item: 20
+
+Stack Operations Menu:
+1. Push
+2. Pop
+3. Peek
+4. Is Empty
+5. Is Full
+6. Exit
+Enter your choice: 4
+Is Empty: false
+
+Stack Operations Menu:
+1. Push
+2. Pop
+3. Peek
+4. Is Empty
+5. Is Full
+6. Exit
+Enter your choice: 6
+Exiting...
+--------------------------------
+Enter stack capacity: 5
+
+... (push 5 items) ...
+
+Stack Operations Menu:
+1. Push
+2. Pop
+3. Peek
+4. Is Empty
+5. Is Full
+6. Exit
+Enter your choice: 1
+Enter item to push: 60
+Stack Overflow
+--------------------------------
+Enter stack capacity: 5
+
+Stack Operations Menu:
+1. Push
+2. Pop
+3. Peek
+4. Is Empty
+5. Is Full
+6. Exit
+Enter your choice: 2
+Stack Underflow
+*/
