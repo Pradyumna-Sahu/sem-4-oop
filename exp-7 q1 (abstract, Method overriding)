@@ -1,0 +1,124 @@
+/* JAVA Program to Create an abstract class Shape with methods calc_area and calc_volume. Derive four classes
+Sphere(radius) , Cone(radius, height) and Cylinder(radius, height), Box(length, breadth, height)
+from it. Calculate area and volume of all. (Use Method overriding).
+*/
+
+import java.lang.Math;
+
+abstract class Shape {
+    abstract double calc_area();
+    abstract double calc_volume();
+}
+
+class Sphere extends Shape {
+    double radius;
+
+    Sphere(double radius) {
+        this.radius = radius;
+    }
+
+    @Override
+    double calc_area() {
+        return 4 * Math.PI * radius * radius;
+    }
+
+    @Override
+    double calc_volume() {
+        return (4.0 / 3.0) * Math.PI * radius * radius * radius;
+    }
+}
+
+class Cone extends Shape {
+    double radius;
+    double height;
+
+    Cone(double radius, double height) {
+        this.radius = radius;
+        this.height = height;
+    }
+
+    @Override
+    double calc_area() {
+        double slantHeight = Math.sqrt(radius * radius + height * height);
+        return Math.PI * radius * (radius + slantHeight);
+    }
+
+    @Override
+    double calc_volume() {
+        return (1.0 / 3.0) * Math.PI * radius * radius * height;
+    }
+}
+
+class Cylinder extends Shape {
+    double radius;
+    double height;
+
+    Cylinder(double radius, double height) {
+        this.radius = radius;
+        this.height = height;
+    }
+
+    @Override
+    double calc_area() {
+        return 2 * Math.PI * radius * (radius + height);
+    }
+
+    @Override
+    double calc_volume() {
+        return Math.PI * radius * radius * height;
+    }
+}
+
+class Box extends Shape {
+    double length;
+    double breadth;
+    double height;
+
+    Box(double length, double breadth, double height) {
+        this.length = length;
+        this.breadth = breadth;
+        this.height = height;
+    }
+
+    @Override
+    double calc_area() {
+        return 2 * (length * breadth + length * height + breadth * height);
+    }
+
+    @Override
+    double calc_volume() {
+        return length * breadth * height;
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Sphere sphere = new Sphere(10);
+        Cone cone = new Cone(5, 8);
+        Cylinder cylinder = new Cylinder(5, 8);
+        Box box = new Box(5, 8, 7);
+
+        System.out.println("Area of sphere: " + sphere.calc_area());
+        System.out.println("Volume of sphere: " + sphere.calc_volume());
+
+        System.out.println("Area of cone: " + cone.calc_area());
+        System.out.println("Volume of cone: " + cone.calc_volume());
+
+        System.out.println("Area of cylinder: " + cylinder.calc_area());
+        System.out.println("Volume of cylinder: " + cylinder.calc_volume());
+
+        System.out.println("Area of box: " + box.calc_area());
+        System.out.println("Volume of box: " + box.calc_volume());
+    }
+}
+
+/* OUTPUT
+Area of sphere: 1256.6370614359173
+Volume of sphere: 4188.790204786391
+Area of cone: 226.72844543261354
+Volume of cone: 209.43951023931953
+Area of cylinder: 408.4070449666731
+Volume of cylinder: 628.3185307179587
+Area of box: 262.0
+Volume of box: 280.0
+*/
