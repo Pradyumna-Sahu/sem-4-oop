@@ -1,0 +1,83 @@
+/* JAVA Program to o read the student roll, name, email-id, and phone number. Do the following validations
+when you are reading the data.
+a) Name: it should accept only alphabets, spaces and .(dot)
+b) Email-id: it should be valid mail id.
+c) Phone: it should accept only numbers
+*/
+
+import java.util.Scanner;
+import java.util.regex.Pattern;
+
+public class StudentValidation {
+
+    // Method to validate name
+    public static boolean isValidName(String name) {
+        return Pattern.matches("[a-zA-Z .]+", name);
+    }
+
+    // Method to validate email
+    public static boolean isValidEmail(String email) {
+        return Pattern.matches("^[\\w.-]+@[\\w.-]+\\.[a-zA-Z]{2,6}$", email);
+    }
+
+    // Method to validate phone number
+    public static boolean isValidPhone(String phone) {
+        return Pattern.matches("\\d+", phone);
+    }
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        try {
+            System.out.print("Enter Roll Number: ");
+            String roll = sc.nextLine();
+
+            System.out.print("Enter Name: ");
+            String name = sc.nextLine();
+            if (!isValidName(name)) {
+                throw new IllegalArgumentException("Invalid name: Only alphabets, spaces, and '.' allowed.");
+            }
+
+            System.out.print("Enter Email ID: ");
+            String email = sc.nextLine();
+            if (!isValidEmail(email)) {
+                throw new IllegalArgumentException("Invalid email format.");
+            }
+
+            System.out.print("Enter Phone Number: ");
+            String phone = sc.nextLine();
+            if (!isValidPhone(phone)) {
+                throw new IllegalArgumentException("Invalid phone number: Only digits allowed.");
+            }
+
+            // If all inputs are valid
+            System.out.println("\n--- Student Details ---");
+            System.out.println("Roll No  : " + roll);
+            System.out.println("Name     : " + name);
+            System.out.println("Email ID : " + email);
+            System.out.println("Phone    : " + phone);
+
+        } catch (IllegalArgumentException e) {
+            System.out.println("Validation Error: " + e.getMessage());
+        } finally {
+            sc.close();
+        }
+    }
+}
+
+/* OUTPUT
+Enter Roll Number: 101
+Enter Name: Pradeep Kumar
+Enter Email ID: pradeep.kumar@example.com
+Enter Phone Number: 9876543210
+
+--- Student Details ---
+Roll No  : 101
+Name     : Pradeep Kumar
+Email ID : pradeep.kumar@example.com
+Phone    : 9876543210
+
+Enter Roll Number: 102
+Enter Name: Vinay123
+Validation Error: Invalid name: Only alphabets, spaces, and '.' allowed.
+*/
