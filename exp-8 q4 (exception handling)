@@ -1,0 +1,79 @@
+/* JAVA Program to enter the student’s name, Rollno. Marks, in any no. of subjects as command
+line argument and find the percentage and grade of the student and thrown a
+NumberFormatException if required.
+*/
+
+public class StudentGradeCalculator {
+
+    public static void main(String[] args) {
+        try {
+            // Check if enough arguments are provided
+            if (args.length < 4) {
+                System.out.println("Usage: java StudentGradeCalculator <RollNo> <Name> <NoOfSubjects> <Marks1> <Marks2> ...");
+                return;
+            }
+
+            // Parse Roll Number
+            int rollNo = Integer.parseInt(args[0]);
+
+            // Parse Name
+            String name = args[1];
+
+            // Parse Number of Subjects
+            int noOfSubjects = Integer.parseInt(args[2]);
+
+            // Check if the correct number of marks are provided
+            if (args.length != 3 + noOfSubjects) {
+                System.out.println("Error: Incorrect number of arguments.  Expected " + (3 + noOfSubjects) + " arguments.");
+                return;
+            }
+
+            // Parse Marks and Calculate Total
+            int totalMarks = 0;
+            int[] marks = new int[noOfSubjects]; // Array to store marks
+            for (int i = 0; i < noOfSubjects; i++) {
+                marks[i] = Integer.parseInt(args[3 + i]); // Parse each mark
+                totalMarks += marks[i];
+            }
+
+            // Calculate Percentage
+            double percentage = (double) totalMarks / noOfSubjects;
+
+            // Determine Grade
+            String grade = calculateGrade(percentage);
+
+            // Output
+            System.out.print(rollNo + " " + name + " ");
+            for(int mark : marks){
+                System.out.print(mark + " ");
+            }
+            System.out.print(totalMarks + " " + percentage + " " + grade);
+            System.out.println();
+
+        } catch (NumberFormatException e) {
+            System.out.println("Number Format Exception: Invalid input.  RollNo, NoOfSubjects, and Marks must be integers.");
+        }
+    }
+
+    // Function to Calculate Grade
+    public static String calculateGrade(double percentage) {
+        if (percentage > 90) {
+            return "O";
+        } else if (percentage > 80) {
+            return "A";
+        } else if (percentage > 70) {
+            return "B";
+        } else if (percentage > 60) {
+            return "C";
+        } else if (percentage >= 50) {
+            return "D";
+        } else {
+            return "F";
+        }
+    }
+}
+
+/* OUTPUT
+java StudentGradeCalculator 101 Pradeep 3 85 90 95
+101 Pradeep 85 90 95 270 90.0 A
+*/
