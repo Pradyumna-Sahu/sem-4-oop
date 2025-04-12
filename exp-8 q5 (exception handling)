@@ -1,0 +1,27 @@
+//JAVA Program to Check Whether User Input Is Number Or Not
+
+import java.util.Scanner;
+
+public class NumberCheck {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.print("Enter something: ");
+        String input = scanner.nextLine();
+
+        // Try to parse the input as a number
+        try {
+            double number = Double.parseDouble(input);
+            System.out.println("Valid number: " + number);
+        } catch (NumberFormatException e) {
+            System.out.println("Invalid input: Not a number");
+        }
+
+        scanner.close();
+    }
+}
+
+/* OUTPUT
+Enter something: 12345
+Valid number: 12345.0
+*/
