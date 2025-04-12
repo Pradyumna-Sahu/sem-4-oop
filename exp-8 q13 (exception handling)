@@ -1,0 +1,81 @@
+/* JAVA Program to Define Exceptions VowelException ,BlankException,ExitException.Write another class Test
+which reads a character from command line. If it is a vowel, throw VowelException,if it is
+blank throw BlankException and for a character 'X' throw an ExitException and terminate
+program. For any other character, display “Valid character”.
+*/
+
+// Custom Exception: VowelException
+class VowelException extends Exception {
+    public VowelException(String message) {
+        super(message);
+    }
+}
+
+// Custom Exception: BlankException
+class BlankException extends Exception {
+    public BlankException(String message) {
+        super(message);
+    }
+}
+
+// Custom Exception: ExitException
+class ExitException extends Exception {
+    public ExitException(String message) {
+        super(message);
+    }
+}
+
+// Main Class: Test
+public class Test {
+    public static void main(String[] args) {
+        try {
+            // Check if input is provided via command line
+            if (args.length == 0) {
+                System.out.println("Usage: java Test <character>");
+                return;
+            }
+
+            char ch = args[0].charAt(0);
+
+            if (Character.isWhitespace(ch)) {
+                throw new BlankException("BlankException: Input cannot be blank.");
+            }
+
+            if ("AEIOUaeiou".indexOf(ch) != -1) {
+                throw new VowelException("VowelException: Input is a vowel.");
+            }
+
+            if (ch == 'X' || ch == 'x') {
+                throw new ExitException("ExitException: Exit character encountered.");
+            }
+
+            // Valid character
+            System.out.println("Valid character: " + ch);
+
+        } catch (VowelException | BlankException e) {
+            System.out.println("Exception: " + e.getMessage());
+        } catch (ExitException e) {
+            System.out.println("Exception: " + e.getMessage());
+            System.exit(0); // terminate the program
+        } catch (Exception e) {
+            System.out.println("Unexpected error: " + e.getMessage());
+        }
+    }
+}
+
+/* OUTPUT
+java Test A
+Exception: VowelException: Input is a vowel.
+
+java Test " "
+Exception: BlankException: Input cannot be blank.
+
+java Test X
+Exception: ExitException: Exit character encountered.
+
+java Test B
+Valid character: B
+
+java Test
+Usage: java Test <character>
+*/
