@@ -1,0 +1,49 @@
+/* JAVA Program to  throw the NegativeArraySize exception, when the size of an array is
+Negative.
+*/
+
+import java.util.Scanner;
+
+public class NegativeArraySizeExceptionExample {
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Input: Number of Students : ");
+        int numberOfStudents = scanner.nextInt();
+
+        try {
+            // Attempt to create an array with the given size
+            Student[] students = new Student[numberOfStudents]; // Could throw NegativeArraySizeException
+
+            // If the size is not negative, populate the array and display student details
+            System.out.println("Output: "); // Added output label for consistency
+            for (int i = 0; i < numberOfStudents; i++) {
+                students[i] = new Student("Student " + (i + 1)); // Initialize Student objects
+                System.out.println(students[i].getName()); // Display student names
+            }
+        } catch (NegativeArraySizeException e) {
+            // Catch the NegativeArraySizeException
+            System.out.println("Output: Negative Size for Array is not allowed");
+        } finally {
+            scanner.close(); // Close the scanner to prevent resource leaks
+        }
+    }
+
+    // Inner class representing a Student
+    static class Student {
+        private String name;
+
+        public Student(String name) {
+            this.name = name;
+        }
+
+        public String getName() {
+            return name;
+        }
+    }
+}
+
+/* OUTPUT
+Input: Number of Students : -3
+Output: Negative Size for Array is not allowed
+*/
