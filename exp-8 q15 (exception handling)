@@ -1,0 +1,98 @@
+/* JAVA Program which accepts two integers and an arithmetic operator from the command line
+and performs the operation. Fire the following user defined exceptions:
+a) If the no of arguments are less than 3 then fire “IllegalNumberOfArguments”
+b) If the operator is not an Arithmetic operator, throw “InvalidOperatorException”.
+c) If result is –ve, then throw “NegativeResultException.
+*/
+
+// Custom Exception: IllegalNumberOfArguments
+class IllegalNumberOfArguments extends Exception {
+    public IllegalNumberOfArguments(String message) {
+        super(message);
+    }
+}
+
+// Custom Exception: InvalidOperatorException
+class InvalidOperatorException extends Exception {
+    public InvalidOperatorException(String message) {
+        super(message);
+    }
+}
+
+// Custom Exception: NegativeResultException
+class NegativeResultException extends Exception {
+    public NegativeResultException(String message) {
+        super(message);
+    }
+}
+
+// Main class
+public class CommandLineCalculator {
+    public static void main(String[] args) {
+        try {
+            // (a) Check for number of arguments
+            if (args.length < 3) {
+                throw new IllegalNumberOfArguments("IllegalNumberOfArguments: At least 3 arguments required (num1 operator num2)");
+            }
+
+            // Parse numbers
+            int num1 = Integer.parseInt(args[0]);
+            int num2 = Integer.parseInt(args[2]);
+            char operator = args[1].charAt(0);
+
+            int result = 0;
+
+            // (b) Validate operator and perform operation
+            switch (operator) {
+                case '+': result = num1 + num2; break;
+                case '-': result = num1 - num2; break;
+                case '*': result = num1 * num2; break;
+                case '/': 
+                    if (num2 == 0) throw new ArithmeticException("Division by zero");
+                    result = num1 / num2; 
+                    break;
+                default:
+                    throw new InvalidOperatorException("InvalidOperatorException: Allowed operators are +, -, *, /");
+            }
+
+            // (c) Check for negative result
+            if (result < 0) {
+                throw new NegativeResultException("NegativeResultException: Result is negative (" + result + ")");
+            }
+
+            // Print result
+            System.out.println("Result: " + result);
+
+        } catch (IllegalNumberOfArguments | InvalidOperatorException | NegativeResultException e) {
+            System.out.println("Error: " + e.getMessage());
+        } catch (NumberFormatException e) {
+            System.out.println("Error: Invalid number format. Please enter valid integers.");
+        } catch (ArithmeticException e) {
+            System.out.println("Error: " + e.getMessage());
+        } catch (Exception e) {
+            System.out.println("Unexpected error: " + e.getMessage());
+        }
+    }
+}
+
+/* OUTPUT
+//Valid Input
+java CommandLineCalculator 10 + 5
+Result: 15
+
+// Less than 3 arguments
+java CommandLineCalculator 10 +
+Error: IllegalNumberOfArguments: At least 3 arguments required (num1 operator num2)
+
+// Invalid Operator
+java CommandLineCalculator 10 % 5
+Error: InvalidOperatorException: Allowed operators are +, -, *, /
+
+//Negative Result
+java CommandLineCalculator 5 - 10
+Error: NegativeResultException: Result is negative (-5)
+
+//Division by Zero
+java CommandLineCalculator 10 / 0
+Error: Division by zero
+*/
