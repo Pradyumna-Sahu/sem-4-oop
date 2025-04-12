@@ -56,4 +56,11 @@ public class DivisionProgram {
 Enter first number: 12345
 Enter second number: 0
 Math error: Cannot divide by zero
+
+Enter first number: 20
+Enter second number: 4
+Result = 5.0
+
+Enter first number: abc
+Input error: Please enter valid numeric values.
 */
