@@ -1,0 +1,83 @@
+/* JAVA Program to Design a class Employee with empnumber, empname and empsalary. Validate the user input in
+the following way using exception handling mechanism. 
+empnumber -> only accept the interger values
+empname -> only accept the alphabets
+empsalary -> accepts both int and floating point values and the empsalary should not be less
+than zero
+*/
+
+import java.util.Scanner;
+import java.util.InputMismatchException;
+import java.util.regex.Pattern;
+
+class Employee {
+    int empnumber;
+    String empname;
+    double empsalary;
+
+    public Employee(int empnumber, String empname, double empsalary) {
+        this.empnumber = empnumber;
+        this.empname = empname;
+        this.empsalary = empsalary;
+    }
+
+    public void display() {
+        System.out.println("\n--- Employee Details ---");
+        System.out.println("Employee Number : " + empnumber);
+        System.out.println("Employee Name   : " + empname);
+        System.out.println("Employee Salary : " + empsalary);
+    }
+}
+
+public class EmployeeInput {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        try {
+            // empnumber
+            System.out.print("Enter Employee Number (integer): ");
+            int empnumber = sc.nextInt();
+            sc.nextLine(); // consume leftover newline
+
+            // empname
+            System.out.print("Enter Employee Name (alphabets only): ");
+            String empname = sc.nextLine();
+            if (!Pattern.matches("[a-zA-Z ]+", empname)) {
+                throw new IllegalArgumentException("Invalid name: Only alphabets allowed.");
+            }
+
+            // empsalary
+            System.out.print("Enter Employee Salary (non-negative number): ");
+            double empsalary = sc.nextDouble();
+            if (empsalary < 0) {
+                throw new IllegalArgumentException("Salary must be greater than or equal to zero.");
+            }
+
+            // Create and display employee
+            Employee emp = new Employee(empnumber, empname, empsalary);
+            emp.display();
+
+        } catch (InputMismatchException e) {
+            System.out.println("Input Error: Please enter the correct data type.");
+        } catch (IllegalArgumentException e) {
+            System.out.println("Validation Error: " + e.getMessage());
+        } catch (Exception e) {
+            System.out.println("Unexpected Error: " + e.getMessage());
+        } finally {
+            sc.close();
+        }
+    }
+}
+
+/* OUTPUT
+Enter Employee Number (integer): 101
+Enter Employee Name (alphabets only): Ramesh
+Enter Employee Salary (non-negative number): 55000.75
+--- Employee Details ---
+Employee Number : 101
+Employee Name   : Ramesh
+Employee Salary : 55000.75
+
+Enter Employee Number (integer): abc
+Input Error: Please enter the correct data type.
+*/
