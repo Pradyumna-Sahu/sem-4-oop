@@ -1,0 +1,63 @@
+/* JAVA Program to Create a percent class that can accept values between 0.0 and 100.0. Throw the exceptions
+"value too large" and "value too small" as and when required.
+*/
+
+import java.util.Scanner;
+
+// Custom Exception: Value Too Small
+class ValueTooSmallException extends Exception {
+    public ValueTooSmallException(String message) {
+        super(message);
+    }
+}
+
+// Custom Exception: Value Too Large
+class ValueTooLargeException extends Exception {
+    public ValueTooLargeException(String message) {
+        super(message);
+    }
+}
+
+// Percent Class
+class Percent {
+    private double value;
+
+    public Percent(double value) throws ValueTooSmallException, ValueTooLargeException {
+        if (value < 0.0) {
+            throw new ValueTooSmallException("Value too small: must be >= 0.0");
+        } else if (value > 100.0) {
+            throw new ValueTooLargeException("Value too large: must be <= 100.0");
+        } else {
+            this.value = value;
+        }
+    }
+
+    public void display() {
+        System.out.println("Valid percentage: " + value + "%");
+    }
+}
+
+// Main Class
+public class PercentDemo {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Enter a percentage value (0.0 to 100.0): ");
+        
+        try {
+            double input = scanner.nextDouble();
+            Percent percent = new Percent(input);
+            percent.display();
+        } catch (ValueTooSmallException | ValueTooLargeException e) {
+            System.out.println(e.getMessage());
+        } catch (Exception e) {
+            System.out.println("Invalid input. Please enter a valid decimal number.");
+        }
+
+        scanner.close();
+    }
+}
+
+/* OUTPUT
+Enter a percentage value (0.0 to 100.0): 121
+Value too large: must be <= 100.0
+*/
