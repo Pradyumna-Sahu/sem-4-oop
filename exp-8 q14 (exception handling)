@@ -1,0 +1,97 @@
+/* JAVA Program to Define class MyDate with member’s day, month, and year. Define default and parameterized
+constructors. Accept values from the command line and create a date object. Throw user
+defined exceptions – “InvalidDayException” or “InvalidMonthException” if the day and month
+are invalid. If the date is valid, display message “Valid date”.
+*/
+
+// Custom exception for invalid day
+class InvalidDayException extends Exception {
+    public InvalidDayException(String message) {
+        super(message);
+    }
+}
+
+// Custom exception for invalid month
+class InvalidMonthException extends Exception {
+    public InvalidMonthException(String message) {
+        super(message);
+    }
+}
+
+// MyDate class
+class MyDate {
+    int day, month, year;
+
+    // Default constructor
+    public MyDate() {
+        this.day = 1;
+        this.month = 1;
+        this.year = 2000;
+    }
+
+    // Parameterized constructor with validation
+    public MyDate(int day, int month, int year) throws InvalidDayException, InvalidMonthException {
+        if (month < 1 || month > 12) {
+            throw new InvalidMonthException("InvalidMonthException: Month must be between 1 and 12.");
+        }
+
+        if (day < 1 || day > 31) {
+            throw new InvalidDayException("InvalidDayException: Day must be between 1 and 31.");
+        }
+
+        this.day = day;
+        this.month = month;
+        this.year = year;
+    }
+
+    public void display() {
+        System.out.println("Valid date: " + day + "/" + month + "/" + year);
+    }
+}
+
+// Main class
+public class TestMyDate {
+    public static void main(String[] args) {
+        try {
+            // Ensure enough command line arguments are passed
+            if (args.length < 3) {
+                System.out.println("Usage: java TestMyDate <day> <month> <year>");
+                return;
+            }
+
+            // Parse command-line inputs
+            int day = Integer.parseInt(args[0]);
+            int month = Integer.parseInt(args[1]);
+            int year = Integer.parseInt(args[2]);
+
+            // Create MyDate object
+            MyDate date = new MyDate(day, month, year);
+            date.display();
+
+        } catch (InvalidDayException | InvalidMonthException e) {
+            System.out.println("Error: " + e.getMessage());
+        } catch (NumberFormatException e) {
+            System.out.println("Error: Please enter valid integers for day, month, and year.");
+        } catch (Exception e) {
+            System.out.println("Unexpected error: " + e.getMessage());
+        }
+    }
+}
+
+/* OUTPUT
+// Valid Date
+java TestMyDate 15 8 2023
+Valid date: 15/8/2023
+
+//Invalid Month
+java TestMyDate 10 13 2023
+Error: InvalidMonthException: Month must be between 1 and 12.
+
+// Invalid Day
+java TestMyDate 35 5 2023
+Error: InvalidDayException: Day must be between 1 and 31.
+
+//Invalid Input Format
+java TestMyDate 15 Aug 2023
+Error: Please enter valid integers for day, month, and year.
+*/
