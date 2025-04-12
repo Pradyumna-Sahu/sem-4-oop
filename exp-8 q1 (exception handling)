@@ -1,0 +1,31 @@
+/* JAVA Program with a class that generates an exception when a variable is divided by Zero
+
+*/
+
+public class Main {
+    public static void main(String[] args) {
+        int numerator = 4;
+        int denominator1 = 2;
+        int denominator2 = 0;
+
+        try {
+            // Attempting to divide by denominator1, which will not throw an exception
+            int result1 = numerator / denominator1;
+            System.out.println("Result of division by 2: " + result1);
+
+            // Attempting to divide by denominator2, which will throw an ArithmeticException
+            int result2 = numerator / denominator2;
+            System.out.println("Result of division by 0: " + result2); // This line will not be reached
+
+        } catch (ArithmeticException e) {
+            // Catching the ArithmeticException, specifically for division by zero
+            System.out.println("Divide by Zero Exception"); // Output the error message
+        }
+    }
+}
+
+
+/* OUTPUT
+Result of division by 2: 2
+Divide by Zero Exception
+*/
