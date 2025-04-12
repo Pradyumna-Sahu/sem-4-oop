@@ -1,0 +1,67 @@
+/* JAVA Program to  find factorial of a given number. Throw multiple exceptions and define
+multiple catch statements to handle negative number and out of memory exception. Negative
+number exception thrown if given number is negative value and out of memory exception is
+thrown if the given number is some big value.
+*/
+
+import java.util.Scanner;
+
+// Custom Exception for Negative Numbers
+class NegativeNumberException extends Exception {
+    public NegativeNumberException(String message) {
+        super(message);
+    }
+}
+
+public class FactorialCalculator {
+
+    // Method to calculate factorial
+    public static long factorial(int n) throws NegativeNumberException {
+        if (n < 0) {
+            throw new NegativeNumberException("Factorial of a negative number is not allowed.");
+        }
+
+        if (n > 10000) {
+            // Simulate OutOfMemoryError
+            throw new OutOfMemoryError("Number too large to compute factorial.");
+        }
+
+        long fact = 1;
+        for (int i = 2; i <= n; i++) {
+            fact *= i;
+        }
+        return fact;
+    }
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        try {
+            System.out.print("Enter a number to find factorial: ");
+            int number = sc.nextInt();
+
+            long result = factorial(number);
+            System.out.println("Factorial of " + number + " is: " + result);
+
+        } catch (NegativeNumberException e) {
+            System.out.println("Exception: " + e.getMessage());
+        } catch (OutOfMemoryError e) {
+            System.out.println("Error: " + e.getMessage());
+        } catch (Exception e) {
+            System.out.println("Unexpected error occurred: " + e.getMessage());
+        } finally {
+            sc.close();
+        }
+    }
+}
+
+/* OUTPUT
+Enter a number to find factorial: 10001
+Error: Number too large to compute factorial.
+
+Enter a number to find factorial: 5
+Factorial of 5 is: 120
+
+Enter a number to find factorial: -3
+Exception: Factorial of a negative number is not allowed.
+*/
