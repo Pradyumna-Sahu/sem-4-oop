@@ -1,0 +1,59 @@
+/* JAVA Program  which satisfy following condition:
+(i) A function to read two double types numbers from keyboard
+(ii) A function to calculate the division of these two numbers
+(iii) A try block to throw an Exception When a wrong type of data is keyed in
+(iv) A try block to detect and throw an exception if the condition “divided by zero” occurs
+(v) Appropriate catch block to handle the exception thrown.
+*/
+
+import java.util.InputMismatchException;
+import java.util.Scanner;
+
+public class DivisionProgram {
+
+    // (i) Function to read two double numbers from keyboard
+    public static double[] readInput() throws InputMismatchException {
+        Scanner scanner = new Scanner(System.in);
+        double[] numbers = new double[2];
+
+        System.out.print("Enter first number: ");
+        numbers[0] = scanner.nextDouble(); // might throw InputMismatchException
+
+        System.out.print("Enter second number: ");
+        numbers[1] = scanner.nextDouble(); // might throw InputMismatchException
+
+        return numbers;
+    }
+
+    // (ii) Function to calculate the division
+    public static double divide(double a, double b) throws ArithmeticException {
+        // (iv) Detect division by zero
+        if (b == 0.0) {
+            throw new ArithmeticException("Cannot divide by zero");
+        }
+        return a / b;
+    }
+
+    public static void main(String[] args) {
+        try {
+            // (iii) Try block to throw exception on wrong input type
+            double[] values = readInput();
+            double result = divide(values[0], values[1]);
+            System.out.println("Result = " + result);
+
+        } catch (InputMismatchException e) {
+            System.out.println("Input error: Please enter valid numeric values.");
+        } catch (ArithmeticException e) {
+            System.out.println("Math error: " + e.getMessage());
+        } catch (Exception e) {
+            // General catch block (optional)
+            System.out.println("An unexpected error occurred: " + e.getMessage());
+        }
+    }
+}
+
+/* OUTPUT
+Enter first number: 12345
+Enter second number: 0
+Math error: Cannot divide by zero
+*/
