@@ -1,0 +1,72 @@
+/* JAVA Program to o find the exception marks out of bounds. In this program create a class
+called Student. If the mark is greater than 100 it must create an exception called
+MarkOutOfBounds Exception and throw it.
+*/
+
+import java.util.Scanner;
+
+// Custom Exception Class
+class MarkOutOfBoundsException extends Exception {
+    public MarkOutOfBoundsException(String message) {
+        super(message);
+    }
+}
+
+// Student Class
+class Student {
+    int rollNo;
+    String name;
+    int marks;
+
+    public Student(int rollNo, String name, int marks) throws MarkOutOfBoundsException {
+        if (marks > 100) {
+            throw new MarkOutOfBoundsException("Marks Out of Bounds: must be less than/equal to 100");
+        }
+        this.rollNo = rollNo;
+        this.name = name;
+        this.marks = marks;
+    }
+
+    public String display() {
+        if (marks > 90) {
+            return "O";
+        } else if (marks > 80) {
+            return "A";
+        } else if (marks > 70) {
+            return "B";
+        } else if (marks > 60) {
+            return "C";
+        } else if (marks >= 50) {
+            return "D";
+        } else {
+            return "F";
+        }
+    }
+}
+
+// Main class
+public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        try {
+            int rollNo = sc.nextInt();
+            sc.nextLine(); // consume newline
+            String name = sc.nextLine();
+            int marks = sc.nextInt();
+
+            Student s = new Student(rollNo, name, marks);
+            s.display();
+        } catch (MarkOutOfBoundsException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+}
+
+
+/* OUTPUT
+11
+AMit
+123
+Marks Out of Bounds: must be less than/equal to 100
+*/
