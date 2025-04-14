@@ -1,7 +1,62 @@
 // JAVA Program to implement thread using runnable interface.
 
+class A implements Runnable {
+    public void run() {
+        for(int i = 0; i <= 5; i++) {
+            System.out.println("A" + i);
+        }
+    }
+}
 
+class B implements Runnable {
+    public void run() {
+        for(int j = 0; j <= 5; j++) {
+            System.out.println("B" + j);
+        }
+    }
+}
+
+class C implements Runnable {
+    public void run() {
+        for(int k = 0; k <= 5; k++) {
+            System.out.println("C" + k);
+        }
+    }
+}
+
+public class Main{
+     public static void main(String []args){
+        A m1 = new A();
+        B m2 = new B();
+        C m3 = new C();
+        Thread t1 = new Thread(m1);
+        Thread t2 = new Thread(m2);
+        Thread t3 = new Thread(m3);
+        t1.start();
+        t2.start();
+        t3.start();
+        System.out.println("Main Ends");
+     }
+}
 
 /* OUTPUT
-
+Main Ends
+C0
+C1
+C2
+C3
+C4
+C5
+A0
+A1
+A2
+A3
+A4
+A5
+B0
+B1
+B2
+B3
+B4
+B5
 */
