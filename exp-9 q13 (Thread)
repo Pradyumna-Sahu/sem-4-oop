@@ -1,0 +1,80 @@
+/* JAVA Program to have Several objects of single thread as multi threading and demo for join.
+Create three threads and join at appropriate place.
+*/
+
+class MyWorker extends Thread {
+    private String taskName;
+
+    MyWorker(String name) {
+        this.taskName = name;
+    }
+
+    public void run() {
+        for (int i = 1; i <= 3; i++) {
+            System.out.println(taskName + " - Step " + i);
+            try {
+                Thread.sleep(500); // Simulate work
+            } catch (InterruptedException e) {
+                System.out.println(taskName + " interrupted.");
+            }
+        }
+        System.out.println(taskName + " finished.");
+    }
+}
+
+public class MultiThreadJoinDemo {
+    public static void main(String[] args) {
+        // Create three threads (different objects of same class)
+        MyWorker t1 = new MyWorker("Thread-1");
+        MyWorker t2 = new MyWorker("Thread-2");
+        MyWorker t3 = new MyWorker("Thread-3");
+
+        // Start first thread
+        t1.start();
+
+        try {
+            // Wait for t1 to finish before starting t2
+            t1.join();
+        } catch (InterruptedException e) {
+            System.out.println("Main thread interrupted during t1 join.");
+        }
+
+        // Start second thread
+        t2.start();
+
+        try {
+            // Wait for t2 to finish before starting t3
+            t2.join();
+        } catch (InterruptedException e) {
+            System.out.println("Main thread interrupted during t2 join.");
+        }
+
+        // Start third thread
+        t3.start();
+
+        try {
+            // Wait for t3 to finish before ending main thread
+            t3.join();
+        } catch (InterruptedException e) {
+            System.out.println("Main thread interrupted during t3 join.");
+        }
+
+        System.out.println("Main thread ends after all threads complete.");
+    }
+}
+
+/* OUTPUT
+Thread-1 - Step 1
+Thread-1 - Step 2
+Thread-1 - Step 3
+Thread-1 finished.
+Thread-2 - Step 1
+Thread-2 - Step 2
+Thread-2 - Step 3
+Thread-2 finished.
+Thread-3 - Step 1
+Thread-3 - Step 2
+Thread-3 - Step 3
+Thread-3 finished.
+Main thread ends after all threads complete.
+*/
