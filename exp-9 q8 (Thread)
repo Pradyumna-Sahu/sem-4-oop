@@ -1,0 +1,36 @@
+// JAVA Program to name the thread. In the main program change the name of the thread
+
+public class ThreadNamingExample {
+    public static void main(String[] args) {
+        // Create a thread with a custom Runnable
+        Thread thread = new Thread(() -> {
+            System.out.println("Thread is running...");
+            try {
+                Thread.sleep(1000); // Simulate some work
+            } catch (InterruptedException e) {
+                System.out.println("Thread interrupted.");
+            }
+        });
+
+        // Set the initial name of the thread
+        thread.setName("InitialThreadName");
+
+        // Print the name of the thread before starting
+        System.out.println("Thread name before start: " + thread.getName());
+
+        // Start the thread
+        thread.start();
+
+        // Change the thread name after starting
+        thread.setName("RenamedThread");
+
+        // Print the name of the thread after renaming
+        System.out.println("Thread name after renaming: " + thread.getName());
+    }
+}
+
+/* OUTPUT
+Thread name before start: InitialThreadName
+Thread name after renaming: RenamedThread
+Thread is running...
+*/
