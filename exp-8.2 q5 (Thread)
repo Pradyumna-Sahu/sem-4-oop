@@ -1,0 +1,42 @@
+// JAVA Program to show the use of synchronized method ()
+
+class BankAccount {
+    private int balance = 1000;
+
+    // Synchronized method to prevent race condition
+    public synchronized void withdraw(int amount, String threadName) {
+        if (balance >= amount) {
+            System.out.println(threadName + " is going to withdraw $" + amount);
+            try {
+                Thread.sleep(100); // Simulate time taken to process
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            balance -= amount;
+            System.out.println(threadName + " completed withdrawal. Remaining balance: $" + balance);
+        } else {
+            System.out.println(threadName + " tried to withdraw $" + amount + " but not enough balance.");
+        }
+    }
+}
+
+public class SynchronizedExample {
+    public static void main(String[] args) {
+        BankAccount account = new BankAccount();
+
+        // Thread 1
+        Thread t1 = new Thread(() -> account.withdraw(700, "Thread-1"));
+
+        // Thread 2
+        Thread t2 = new Thread(() -> account.withdraw(700, "Thread-2"));
+
+        t1.start();
+        t2.start();
+    }
+}
+
+/* OUTPUT
+Thread-1 is going to withdraw $700
+Thread-1 completed withdrawal. Remaining balance: $300
+Thread-2 tried to withdraw $700 but not enough balance.
+*/
