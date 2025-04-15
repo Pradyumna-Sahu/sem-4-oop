@@ -1,0 +1,53 @@
+/* JAVA Program to explain the multithreading with the use of multiplication Tables. Three
+threads must be defined. Each one must create one multiplication table; they are 5 table, 7 table
+and 13 table
+*/
+
+class MultiplicationTable extends Thread {
+    private int number;
+
+    public MultiplicationTable(int number) {
+        this.number = number;
+    }
+
+    @Override
+    public void run() {
+        System.out.println("Multiplication Table of " + number + ":");
+        for (int i = 1; i <= 10; i++) {
+            System.out.println(number + " x " + i + " = " + (number * i));
+            try {
+                Thread.sleep(100); // Add slight delay to simulate real work
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+        System.out.println("------------------------------");
+    }
+}
+
+public class MultiThreadedTables {
+    public static void main(String[] args) {
+        MultiplicationTable table5 = new MultiplicationTable(5);
+        MultiplicationTable table7 = new MultiplicationTable(7);
+        MultiplicationTable table13 = new MultiplicationTable(13);
+
+        // Start all threads
+        table5.start();
+        table7.start();
+        table13.start();
+    }
+}
+
+/* OUTPUT
+Multiplication Table of 5:
+5 x 1 = 5
+Multiplication Table of 7:
+7 x 1 = 7
+Multiplication Table of 13:
+13 x 1 = 13
+5 x 2 = 10
+7 x 2 = 14
+13 x 2 = 26
+...
+------------------------------
+*/
