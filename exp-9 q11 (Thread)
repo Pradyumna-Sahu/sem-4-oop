@@ -1,0 +1,30 @@
+// JAVA Program to illustrate thread sleep. Create and run a thread. Then make it sleep
+
+class SleepExampleThread extends Thread {
+    public void run() {
+        System.out.println("Thread is running...");
+
+        try {
+            System.out.println("Thread going to sleep for 3 seconds...");
+            Thread.sleep(3000); // Sleep for 3 seconds
+        } catch (InterruptedException e) {
+            System.out.println("Thread interrupted.");
+        }
+
+        System.out.println("Thread woke up and finished execution.");
+    }
+}
+
+public class ThreadSleepExample {
+    public static void main(String[] args) {
+        SleepExampleThread t = new SleepExampleThread();
+        t.start();
+    }
+}
+
+/* OUTPUT
+Thread is running...
+Thread going to sleep for 3 seconds...
+(Thread pauses for 3 seconds)
+Thread woke up and finished execution.
+*/
