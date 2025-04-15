@@ -1,0 +1,73 @@
+// JAVA Program to o show the use of wait (), notify (), notify all() methods
+
+import java.util.LinkedList;
+import java.util.Queue;
+
+class SharedQueue {
+    private final Queue<Integer> queue = new LinkedList<>();
+    private final int CAPACITY = 5;
+
+    public synchronized void produce(int value) throws InterruptedException {
+        while (queue.size() == CAPACITY) {
+            System.out.println("Queue full. Producer waiting...");
+            wait(); // Wait until space is available
+        }
+        queue.add(value);
+        System.out.println("Produced: " + value);
+        notifyAll(); // Notify consumers
+    }
+
+    public synchronized int consume() throws InterruptedException {
+        while (queue.isEmpty()) {
+            System.out.println("Queue empty. Consumer waiting...");
+            wait(); // Wait until item is available
+        }
+        int value = queue.poll();
+        System.out.println("Consumed: " + value);
+        notifyAll(); // Notify producers
+        return value;
+    }
+}
+
+public class WaitNotifyExample {
+    public static void main(String[] args) {
+        SharedQueue sharedQueue = new SharedQueue();
+
+        // Producer thread
+        Thread producer = new Thread(() -> {
+            int value = 1;
+            while (true) {
+                try {
+                    sharedQueue.produce(value++);
+                    Thread.sleep(500); // simulate time to produce
+                } catch (InterruptedException e) {
+                    break;
+                }
+            }
+        });
+
+        // Consumer thread
+        Thread consumer = new Thread(() -> {
+            while (true) {
+                try {
+                    sharedQueue.consume();
+                    Thread.sleep(1000); // simulate time to consume
+                } catch (InterruptedException e) {
+                    break;
+                }
+            }
+        });
+
+        producer.start();
+        consumer.start();
+    }
+}
+
+/* OUTPUT
+Produced: 1
+Consumed: 1
+Produced: 2
+Produced: 3
+Consumed: 2
+...
+*/
