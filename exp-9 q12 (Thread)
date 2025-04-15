@@ -1,0 +1,71 @@
+// JAVA Program to explain thread suspension and resumption.
+
+class MyThread extends Thread {
+    private boolean suspended = false;
+
+    public synchronized void suspendThread() {
+        suspended = true;
+    }
+
+    public synchronized void resumeThread() {
+        suspended = false;
+        notify(); // Wake up the thread
+    }
+
+    public void run() {
+        for (int i = 1; i <= 10; i++) {
+            synchronized(this) {
+                while (suspended) {
+                    try {
+                        wait(); // Wait while suspended
+                    } catch (InterruptedException e) {
+                        System.out.println("Thread interrupted.");
+                    }
+                }
+            }
+
+            System.out.println("Thread running: " + i);
+
+            try {
+                Thread.sleep(500); // Simulate work
+            } catch (InterruptedException e) {
+                System.out.println("Thread sleep interrupted.");
+            }
+        }
+    }
+}
+
+public class ThreadSuspendResumeExample {
+    public static void main(String[] args) {
+        MyThread t = new MyThread();
+        t.start();
+
+        try {
+            Thread.sleep(2000); // Let thread run for a while
+            t.suspendThread();
+            System.out.println("Thread suspended.");
+
+            Thread.sleep(3000); // Pause main thread to simulate delay
+
+            t.resumeThread();
+            System.out.println("Thread resumed.");
+        } catch (InterruptedException e) {
+            System.out.println("Main thread interrupted.");
+        }
+    }
+}
+
+/* OUTPUT
+Thread running: 1
+Thread running: 2
+Thread running: 3
+Thread running: 4
+Thread suspended.
+Thread resumed.
+Thread running: 5
+Thread running: 6
+Thread running: 7
+Thread running: 8
+Thread running: 9
+Thread running: 10
+*/
