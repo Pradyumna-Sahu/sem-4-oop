@@ -1,0 +1,53 @@
+/* JAVA Program to  creates ten threads, each of which do some work(search for the
+maximum value of a large matrix .Each thread searches one portion of the matrix.) It waits for
+them all to finish, then gathers the results.
+*/
+
+import java.util.Random;
+
+public class SimpleMatrixMax {
+    static int[][] matrix = new int[100][100]; // Smaller matrix for simplicity
+    static int[] maxValues = new int[10]; // One max per thread
+
+    public static void main(String[] args) throws InterruptedException {
+        fillMatrix();
+
+        Thread[] threads = new Thread[10];
+
+        for (int i = 0; i < 10; i++) {
+            final int index = i;
+            threads[i] = new Thread(() -> {
+                int localMax = Integer.MIN_VALUE;
+                for (int row = index * 10; row < (index + 1) * 10; row++) {
+                    for (int col = 0; col < 100; col++) {
+                        if (matrix[row][col] > localMax) {
+                            localMax = matrix[row][col];
+                        }
+                    }
+                }
+                maxValues[index] = localMax;
+            });
+            threads[i].start();
+        }
+
+        for (Thread t : threads) t.join();
+
+        int overallMax = Integer.MIN_VALUE;
+        for (int val : maxValues) {
+            if (val > overallMax) overallMax = val;
+        }
+
+        System.out.println("Maximum value in the matrix: " + overallMax);
+    }
+
+    static void fillMatrix() {
+        Random rand = new Random();
+        for (int i = 0; i < 100; i++)
+            for (int j = 0; j < 100; j++)
+                matrix[i][j] = rand.nextInt(1000); // Values from 0 to 999
+    }
+}
+
+/* OUTPUT
+Maximum value in the matrix: 999
+*/
