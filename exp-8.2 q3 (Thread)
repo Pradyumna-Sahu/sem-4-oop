@@ -1,0 +1,28 @@
+// JAVA Program to o create and start two threads, each of which prints two lines to System.out
+
+public class TwoThreadsExample {
+    public static void main(String[] args) {
+        // First thread
+        Thread thread1 = new Thread(() -> {
+            System.out.println("Thread 1 - Line 1");
+            System.out.println("Thread 1 - Line 2");
+        });
+
+        // Second thread
+        Thread thread2 = new Thread(() -> {
+            System.out.println("Thread 2 - Line 1");
+            System.out.println("Thread 2 - Line 2");
+        });
+
+        // Start both threads
+        thread1.start();
+        thread2.start();
+    }
+}
+
+/* OUTPUT
+Thread 2 - Line 1
+Thread 2 - Line 2
+Thread 1 - Line 1
+Thread 1 - Line 2
+*/
